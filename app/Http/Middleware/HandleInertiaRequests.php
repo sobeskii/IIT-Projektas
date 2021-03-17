@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -36,8 +37,13 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
+        if($request->user()){
+            $userdata = $request->user()->only('id', 'name', 'email');
+            $userdata['isLoggedIn'] = Auth::check();
+        }else $userdata['isLoggedIn'] = false;
+
         return array_merge(parent::share($request), [
-            //
+            'user' => $userdata,
         ]);
     }
 }
