@@ -12,7 +12,14 @@
         Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.
       </p>
     </div>
-    <search-bar></search-bar>
+    <div class="mt-10">
+        <div class="max-w-3xl mx-auto m-0 pt-0 pb-0">
+            <label class="block">
+                <span class="text-gray-700"></span>
+                <input type="text" class="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black" placeholder="Search for your favourite artist/album...">
+            </label>
+        </div>
+    </div>
   </div>
 </div>
     </app-layout>
@@ -27,7 +34,6 @@
     import JetInput from '@/Jetstream/Input'
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
-    import SearchBar from '../CustomComponents/Search.vue';
 
     export default {
         components: {
@@ -35,7 +41,7 @@
           JetInput,
           JetAuthenticationCard,
           JetAuthenticationCardLogo,
-          SearchBar
+
         },
     }
 </script>

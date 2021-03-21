@@ -5,9 +5,14 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Illuminate\Support\Facades\Auth;
+use Aerni\Spotify\Facades\SpotifyFacade;
+use Aerni\Spotify\SpotifyAuth;
+use Illuminate\Support\Facades\Cache;
+
 
 class HandleInertiaRequests extends Middleware
 {
+
     /**
      * The root template that's loaded on the first page visit.
      *
@@ -40,7 +45,8 @@ class HandleInertiaRequests extends Middleware
         if($request->user()){
             $userdata = $request->user()->only('id', 'name', 'email');
             $userdata['isLoggedIn'] = Auth::check();
-        }else $userdata['isLoggedIn'] = false;
+        }
+        else $userdata['isLoggedIn'] = false;
 
         return array_merge(parent::share($request), [
             'user' => $userdata,

@@ -5,7 +5,8 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Aerni\Spotify\Spotify;
+
+use Aerni\Spotify\Facades\SpotifyFacade;
 
 class HomeController extends Controller
 {
@@ -26,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-      return Inertia::render('Home');
+        return Inertia::render('Home');
     }
 
 }
