@@ -15,15 +15,19 @@ class SearchController extends Controller
    */
     public function index(Request $request)
     {
-        $term   =   ($request->term) != null ? $request->term : ' ';
-        $offset =   ($request->offset) != null && $request->offset > 0 ? (int)$request->offset : 0;
+        $term       =   ($request->term) != null ? $request->term : ' ';
+        $offset     =   ($request->offset) != null && $request->offset > 0 ? (int)$request->offset : 0;
+        $perPage    =   ($request->perPage) != null ? (int)$request->perPage : 15;
 
         return Inertia::render('Search',[
             'albums'        =>  Spotify::searchAlbums($term)
                                                 ->offset($offset)
+                                                ->limit($perPage)
                                                 ->get(),
+
             'request_items' =>  ['term'     =>  $term,
                                  'offset'   =>  $offset,
+                                 'perPage'  =>  $perPage,
                                 ],
         ]);
     }
