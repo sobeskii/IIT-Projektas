@@ -1,6 +1,6 @@
 <template>
-    <div class="lg:text-center mx-auto absolute bottom-3/4 left-1/3">
-      <p class="mt-4 max-w-2xl text-xl text-gray-400 lg:mx-auto text-center">
+    <div class="sm:text-center mx-auto sm:mt-20 mt-8 p-4 h-96">
+      <p class="max-w-2xl text-gray-400 lg:mx-auto sm:text-4xl text-2xl">
         <i :class="icon"></i> {{ errorText }}
       </p>
     </div>

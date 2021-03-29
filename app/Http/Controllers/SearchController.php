@@ -9,9 +9,9 @@ use Inertia\Inertia;
 class SearchController extends Controller
 {
   /**
-   * Search the specified resource from storage.
+   * Search the specified album/release on the Spotify API.
    *
-   * @return \Illuminate\Http\Response
+   * @return Inertia\Inertia;
    */
     public function index(Request $request)
     {

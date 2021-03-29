@@ -5,8 +5,8 @@
                 Search for releases
             </h2>
         </template>
-        <div class="max-w-lg lg:max-w-6xl bg-white rounded-sm min-h-screen mx-auto mt-1 p-8" >
-            <custom-table :hasRecords="albums.items.length > 0" divClass="container mx-auto px-4 sm:px-8 relative min-h-screen" >
+        <div class="max-w-lg lg:max-w-5xl shadow rounded-sm mx-auto p-2 sm:p-8 h-full" >
+            <custom-table :hasRecords="albums.items.length > 0" divClass="container mx-auto sm:px-8 relative h-full" >
                 <template v-slot:search_input>
                     <input placeholder="Search"
                                 class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
@@ -42,7 +42,7 @@
                         Release date
                     </th>
                     <th
-                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase w-1/6 tracking-wider">
+                        class="px-5 py-3 hidden sm:table-cell border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase w-1/6 tracking-wider">
                         Type
                     </th>
                 </template>

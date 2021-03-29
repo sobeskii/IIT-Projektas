@@ -1,9 +1,8 @@
 <template>
-    <div>
+    <div id="app_layout">
         <jet-banner />
-
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-green-500 border-b border-gray-100">
+        <div class="bg-white h-full">
+            <nav class="bg-green-500 border-b border-green-500">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -11,7 +10,7 @@
                             <!-- Logo -->
                             <div class="flex-shrink-0 flex items-center">
                                 <inertia-link :href="route('home')">
-                                    <jet-application-mark class="block h-9 w-auto" />
+                                    <jet-application-mark class="block h-9 w-9" />
                                 </inertia-link>
                             </div>
 
@@ -141,7 +140,7 @@
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="h-4/5">
                 <slot></slot>
             </main>
         </div>
