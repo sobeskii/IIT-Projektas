@@ -140,7 +140,7 @@
             </header>
 
             <!-- Page Content -->
-            <main class="h-4/5">
+            <main class="h-4/5 sm:pb-8 pb-4">
                 <slot></slot>
             </main>
         </div>

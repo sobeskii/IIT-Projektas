@@ -5,7 +5,7 @@
                 Search for releases
             </h2>
         </template>
-        <div class="max-w-lg lg:max-w-5xl shadow rounded-sm mx-auto p-2 sm:p-8 h-full" >
+        <div class="max-w-lg lg:max-w-5xl rounded-sm mx-auto p-2 sm:p-8 h-full" >
             <custom-table :hasRecords="albums.items.length > 0" divClass="container mx-auto sm:px-8 relative h-full" >
                 <template v-slot:search_input>
                     <input placeholder="Search"
