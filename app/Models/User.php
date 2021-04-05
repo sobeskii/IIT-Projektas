@@ -58,4 +58,20 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    /**
+     * Get the rating record associated with the user.
+    */
+    public function ratings() {   return $this->hasMany('App\Models\Rating');  }
+    /**
+     * Get count of ratings of a user
+    */
+    public function getRatingCount()  { return $this->ratings()->whereUserId($this->id)->count(); }
+    /**
+     * Get rating of rated release
+    */
+    public function getReleaseRating($release)  {   return $this->ratings()->firstWhere( 'release_id', $release );  }
+    /**
+     * Check if user has rated specific release
+    */
+    public function isReleaseRated( $release )  {  return (  $this->ratings()->firstWhere( 'release_id', $release ) != null ) ? true : false; }
 }
