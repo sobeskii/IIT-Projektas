@@ -16,6 +16,7 @@ class ReleaseController extends Controller
      */
     public function index($releaseId)
     {
+
         $release = Spotify::album($releaseId)->get();
 
         $artist = Spotify::artist($release['artists'][0]['id'])->get();
@@ -27,8 +28,9 @@ class ReleaseController extends Controller
         return Inertia::render('Release',[
             'release'                       =>      $release,
             'primary_artist'                =>      $artist,
-            'user_rating_data'              =>      [   'rating'  =>    ( $userRating != null )   ?   $userRating->rating : 0,
-                                                        'review'  =>    ( $userRating != null )   ?   $userRating->review : null
+            'user_rating_data'              =>      [   'rating'    =>    ( $userRating != null )   ?   $userRating->rating : 0,
+                                                        'review'    =>    ( $userRating != null )   ?   $userRating->review : null,
+                                                        'id'        =>    ( $userRating != null)    ?   $userRating->id     : null,
                                                     ],
         ]);
     }

@@ -13,6 +13,7 @@ class Rating extends Model
     //
     protected $fillable = [ 'rating','release_id', 'user_id', 'review' ];
 
+
     /**
     * Get the user record associated with the rating.
     */
@@ -25,4 +26,8 @@ class Rating extends Model
     * Get post like count
     */
     public function likeCount(){ return $this->likes()->count(); }
+    /**
+     * Delete by rating id
+     */
+    public static function deleteRatingById($id){  return Rating::find($id)->delete(); }
 }

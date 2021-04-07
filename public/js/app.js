@@ -16480,6 +16480,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
+/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -16493,6 +16494,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     rating_data: Object,
@@ -16500,10 +16502,24 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     loggedIn: Boolean,
     user_id: Number
   },
+  setup: function setup() {
+    var form = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.useForm)({
+      rating: null,
+      review: null,
+      release_id: null,
+      user_id: null
+    });
+    return {
+      form: form
+    };
+  },
   components: {
     JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_0__.default
   },
   mounted: function mounted() {
+    this.form.release_id = this.release_id;
+    this.form.user_id = this.user_id;
+
     if (!this.loggedIn) {
       $(".submit_rating").remove();
     }
@@ -16511,38 +16527,44 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     if (this.rating_data.rating != 0) {
       this.rate(this.rating_data.rating);
       $("input[name='rating'][value='" + this.rating_data.rating + "']").attr('checked', 'checked');
-      if (this.rating_data.review != null) this.reviewContent = this.rating_data.review;
+      if (this.rating_data.review != null) this.form.review = this.rating_data.review;
     }
   },
   data: function data() {
     return {
       isSet: false,
-      setValue: 0,
-      reviewContent: ''
+      setValue: 0
     };
   },
   methods: {
-    storeRating: function storeRating() {
-      /*axios.put( 'rate/' + this.rating_data.release_id ,
-          { params: { rating : this.setValue ,
-                      user_id : this.rating_data.user_id ,
-                      release_id : this.rating_data.release_id,
-                      review: this.reviewContent,  }})
-          .then(response => {
-              $(".submit_rating").hide();
-          }
-      );*/
+    putRating: function putRating() {
+      var _this = this;
+
+      this.form.put(route("rating.put"), {
+        errorBag: 'putRating',
+        onSuccess: function onSuccess() {
+          _this.hideButtons();
+        },
+        onError: function onError(errors) {// Handle validation errors
+        }
+      });
+    },
+    deleteRating: function deleteRating() {
+      this.$inertia.post(route('rating.delete'), {
+        rating_id: this.rating_data.id,
+        release_id: this.release_id
+      });
     },
     rate: function rate(value) {
       $("#num_rating > small").text(value);
-      $("#set_rating").val(value);
       this.setValue = value;
+      this.form.rating = value;
       this.isSet = true;
     },
     reset: function reset() {
       $("#num_rating > small").text(0);
-      $("#set_rating").val("");
-      this.setValue = 0;
+      this.setValue = null;
+      this.form.rating = null;
       this.isSet = false;
       this.hideButtons();
       $('input[name="rating"]').attr('checked', false);
@@ -16568,9 +16590,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     redirectToLogin: function redirectToLogin() {
       window.location.href = route('login');
-    },
-    inputOnClickIsLoggedIn: function inputOnClickIsLoggedIn(n) {
-      return this.loggedIn ? (rate(starRating(n)), showButtons()) : false;
     }
   }
 });
@@ -16738,7 +16757,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     clickFunc: {
       type: Function,
-      "default": false
+      "default": function _default(fn) {
+        return false;
+      }
     }
   }
 });
@@ -18703,45 +18724,37 @@ var _withId = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.withScopeId)("dat
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-5c5573b6");
 
 var _hoisted_1 = {
-  "class": ""
-};
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
-  type: "hidden",
-  value: "",
-  id: "set_rating"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_3 = {
   "class": "flex w-full sm:w-2/3"
 };
-var _hoisted_4 = {
+var _hoisted_2 = {
   "class": "w-full"
 };
-var _hoisted_5 = {
+var _hoisted_3 = {
   "class": "w-full flex"
 };
-var _hoisted_6 = {
+var _hoisted_4 = {
   id: "num_rating",
   "class": "p-2 w-1/4 sm:w-1/5 md:1/7 text-center"
 };
-var _hoisted_7 = {
+var _hoisted_5 = {
   "class": "hidden rate_options w-full"
 };
-var _hoisted_8 = {
+var _hoisted_6 = {
   "class": "w-full p-3 hidden",
   id: "review"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "clear-both"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Submit ");
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Submit ");
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("   ");
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Remove ");
 
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("   ");
 
@@ -18752,7 +18765,28 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNo
 var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data, $options) {
   var _component_jet_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-button");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("form", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("small", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.rating_data.rating), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("form", {
+    onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.putRating && $options.putRating.apply($options, arguments);
+    }, ["prevent"]))
+  }, [$setup.form.errors ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    key: 0
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.form.errors, function (error) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+      key: error
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(error), 1
+    /* TEXT */
+    );
+  }), 128
+  /* KEYED_FRAGMENT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    type: "hidden",
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $setup.form.rating = $event;
+    })
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.rating]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("small", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.rating_data.rating), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("fieldset", {
     "class": "rating w-2/3 lg:w-1/2 md:w-2/3 sm:w-1/2 mb-3 float-left",
@@ -18766,7 +18800,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
       type: "radio",
       disabled: $props.loggedIn ? false : true,
       onClick: function onClick($event) {
-        return $props.loggedIn ? !$data.isSet ? ($options.rate($options.starRating(n)), $options.showButtons()) : $options.reset() : false;
+        return $props.loggedIn ? ($options.rate($options.starRating(n)), $options.showButtons()) : false;
       },
       id: 'star' + $options.starRating(n),
       name: "rating",
@@ -18774,11 +18808,11 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     }, null, 8
     /* PROPS */
     , ["disabled", "onClick", "id", "value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
-      onClick: _cache[1] || (_cache[1] = function ($event) {
+      onClick: _cache[2] || (_cache[2] = function ($event) {
         return $props.loggedIn ? false : $options.redirectToLogin();
       }),
-      onMouseleave: _cache[2] || (_cache[2] = function ($event) {
-        return !$data.isSet ? $options.showNumericValue(0) : $options.showNumericValue($data.setValue);
+      onMouseleave: _cache[3] || (_cache[3] = function ($event) {
+        return $data.isSet ? $options.showNumericValue($data.setValue) : $options.showNumericValue(0);
       }),
       onMouseover: function onMouseover($event) {
         return $options.showNumericValue($options.starRating(n));
@@ -18796,17 +18830,30 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   /* KEYED_FRAGMENT */
   ))], 8
   /* PROPS */
-  , ["id"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $data.reviewContent = $event;
+  , ["id"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $setup.form.review = $event;
     }),
     rows: "5",
     "class": "w-full h-80",
     name: "review"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.reviewContent]])]), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
-    clickFunc: $options.storeRating,
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.review]])]), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
+    type: "submit",
+    disabled: $setup.form.processing
+  }, {
+    "default": _withId(function () {
+      return [_hoisted_8];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["disabled"]), _hoisted_9, $data.isSet && $props.rating_data.id != null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_jet_button, {
+    key: 0,
+    clickFunc: $options.deleteRating,
     type: "button"
   }, {
     "default": _withId(function () {
@@ -18817,7 +18864,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
 
   }, 8
   /* PROPS */
-  , ["clickFunc"]), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
+  , ["clickFunc"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
     clickFunc: $options.toggleReviewTextArea,
     type: "button"
   }, {
@@ -18829,7 +18876,9 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
 
   }, 8
   /* PROPS */
-  , ["clickFunc"])])])])]);
+  , ["clickFunc"])])])])], 32
+  /* HYDRATE_EVENTS */
+  );
 });
 
 /***/ }),
@@ -19453,9 +19502,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
     type: $props.type,
-    onClick: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+    onClick: _cache[1] || (_cache[1] = function ($event) {
       return _this.clickFunc();
-    }, ["prevent"])),
+    }),
     "class": "inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray transition ease-in-out duration-150"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 8
   /* PROPS */

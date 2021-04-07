@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ReleaseController;
 use App\Http\Controllers\SearchController;
 
@@ -23,3 +24,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search',[SearchController::class,'index'])->name('search.index');
 
 Route::get('/release/{spotifyId}',[ReleaseController::class,'index'])->name('release.index');
+
+Route::put('/rating/put',[RatingController::class, 'put'])->name('rating.put');
+Route::post('/rating/delete',[RatingController::class,'delete'])->name('rating.delete');
