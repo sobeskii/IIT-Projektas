@@ -27,13 +27,13 @@ class RatingController extends Controller
                                         'rating'        =>      $data['rating']
                                     ]);
 
-        return Redirect::route('release.index',$request->release_id);
+        return Redirect::route('release.index',$request->release_id)->with(['toast' => ['message' => "Rating added"]]);
     }
 
     public function delete(Request $request){
 
         Rating::deleteRatingById($request->input('rating_id'));
 
-        return Redirect::route('release.index',$request->release_id);
+        return Redirect::route('release.index',$request->release_id)->with(['toast' => ['message' => "Rating removed"]]);
     }
 }

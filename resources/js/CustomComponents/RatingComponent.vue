@@ -115,10 +115,21 @@ export default{
             })
         },
         deleteRating(){
-            this.$inertia.post(route('rating.delete'),{
-                rating_id:this.rating_data.id,
-                release_id:this.release_id,
-            });
+            this.$inertia.post(route('rating.delete'),
+                {
+                    rating_id:this.rating_data.id,
+                    release_id:this.release_id,
+                },
+                {
+                    onSuccess: () =>{
+                        this.hideButtons();
+                        this.reset();
+                    },
+                    onError: () =>{
+
+                    }
+                },
+            );
         },
         rate( value ){
             $("#num_rating > small").text(value);

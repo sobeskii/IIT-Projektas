@@ -1,5 +1,4 @@
 <template>
-    <div class="relative">
         <div @click="open = ! open">
             <slot name="trigger"></slot>
         </div>
@@ -25,7 +24,6 @@
                 </div>
             </div>
         </transition>
-    </div>
 </template>
 
 <script>
@@ -72,7 +70,7 @@ export default {
             if (this.align === 'left') {
                 return 'origin-top-left left-0'
             } else if (this.align === 'right') {
-                return 'origin-top-right right-0'
+                return 'origin-top-right right-5'
             } else {
                 return 'origin-top'
             }

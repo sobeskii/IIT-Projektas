@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Aerni\Spotify\Facades\SpotifyFacade;
 use Aerni\Spotify\SpotifyAuth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 
 
 class HandleInertiaRequests extends Middleware
@@ -49,7 +50,8 @@ class HandleInertiaRequests extends Middleware
         else $userdata['isLoggedIn'] = false;
 
         return array_merge(parent::share($request), [
-            'user' => $userdata,
+            'user'  =>  $userdata,
+            'toast' =>  fn() => Session::get('toast'),
         ]);
     }
 }

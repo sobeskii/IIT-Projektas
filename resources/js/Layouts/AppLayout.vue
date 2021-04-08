@@ -1,5 +1,6 @@
 <template>
-    <div id="app_layout">
+    <div v-cloak id="app_layout">
+        <toast :toast="$page.props.toast"></toast>
         <jet-banner />
         <div class="bg-white h-full">
             <nav class="bg-green-500 border-b border-green-500">
@@ -25,15 +26,15 @@
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                           <template v-if="$page.props.user.isLoggedIn">
                             <!-- Settings Dropdown -->
-                            <div class="ml-3 relative">
+                            <div class="ml-3">
                                 <jet-dropdown align="right" width="48">
                                     <template #trigger>
-                                        <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                                        <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-75 ease-in-out">
                                             <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
                                         </button>
 
                                         <span v-else class="inline-flex rounded-md">
-                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-500 hover:text-gray-200 focus:outline-none transition ease-in-out duration-150">
+                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-500 hover:text-gray-200 focus:outline-none transition ease-in-out duration-75">
                                                 {{ $page.props.user.name }}
 
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -154,6 +155,7 @@
     import JetDropdownLink from '@/Jetstream/DropdownLink'
     import JetNavLink from '@/Jetstream/NavLink'
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
+    import Toast from "./../CustomComponents/Toast"
 
     export default {
         components: {
@@ -163,6 +165,7 @@
             JetDropdownLink,
             JetNavLink,
             JetResponsiveNavLink,
+            Toast,
         },
         props: {
             isLoggedIn: Boolean,
