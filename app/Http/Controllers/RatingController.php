@@ -32,7 +32,7 @@ class RatingController extends Controller
 
     public function delete(Request $request){
 
-        $request->validate( [   'rating_id'     =>  'required|integer|exists:rating,id',
+        $request->validate( [   'rating_id'     =>  'required|integer|exists:user_ratings,id',
                                 'release_id'    =>  ['required','string',new ReleaseExists],
         ]);
 
