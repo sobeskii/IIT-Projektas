@@ -4,8 +4,8 @@
             <div class="md:h-full md:w-40 w-20 h-full">
                 <img class="w-100 h-100 rounded-md" :src="release.images[0].url" />
             </div>
-            <div class="flex-none w-1/2">
-                <span class="bottom-2 absolute">
+            <div class="flex-none w-1/2 overflow-hidden">
+                <span class="bottom-2 sm:absolute">
                     <p class="whitespace-no-wrap text-white md:text-xl text-sm">{{ release.name }}</p>
                     <p class="whitespace-no-wrap text-xs md:text-base  text-white">
                         <template v-for="(artist) in release.artists" v-bind:key=artist>

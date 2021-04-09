@@ -14,7 +14,7 @@ class RatingController extends Controller
 
         $request->validate( [   'review'        =>  'nullable|string|max:10000',
                                 'release_id'    =>  ['required','string',new ReleaseExists],
-                                'user_id'       =>  'required|exists:users,id',
+                                'user_id'       =>  'required|integer|exists:users,id',
                                 'rating'        =>  'required|numeric|between:0.5,5'
         ]);
         $data = $request->all();
@@ -27,13 +27,17 @@ class RatingController extends Controller
                                         'rating'        =>      $data['rating']
                                     ]);
 
-        return Redirect::route('release.index',$request->release_id)->with(['toast' => ['message' => "Rating added"]]);
+        return Redirect::route('release.index',$request->release_id)->with(['success' => ['message' => "Rating added"]]);
     }
 
     public function delete(Request $request){
 
+        $request->validate( [   'rating_id'     =>  'required|integer|exists:rating,id',
+                                'release_id'    =>  ['required','string',new ReleaseExists],
+        ]);
+
         Rating::deleteRatingById($request->input('rating_id'));
 
-        return Redirect::route('release.index',$request->release_id)->with(['toast' => ['message' => "Rating removed"]]);
+        return Redirect::route('release.index',$request->release_id)->with(['success' => ['message' => "Rating removed"]]);
     }
 }

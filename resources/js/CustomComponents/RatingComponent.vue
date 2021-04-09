@@ -1,10 +1,5 @@
 <template>
     <form @submit.prevent="putRating">
-        <template v-if="form.errors">
-            <div v-for="error in form.errors" v-bind:key="error">
-                {{  error  }}
-            </div>
-        </template>
         <input type="hidden" v-model="form.rating">
         <div class="flex w-full sm:w-2/3">
   			<div class="w-full">
@@ -105,7 +100,6 @@ export default{
     methods: {
         putRating(){
             this.form.put(route("rating.put"),{
-                errorBag: 'putRating',
                 onSuccess: () => {
                     this.hideButtons();
                 },

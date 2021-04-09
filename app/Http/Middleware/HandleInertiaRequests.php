@@ -50,8 +50,9 @@ class HandleInertiaRequests extends Middleware
         else $userdata['isLoggedIn'] = false;
 
         return array_merge(parent::share($request), [
-            'user'  =>  $userdata,
-            'toast' =>  fn() => Session::get('toast'),
+            'user'      =>  $userdata,
+            'success'   =>  fn() => (Session::get('success')) != null ?     Session::get('success') :
+                                                                            new \stdClass(),
         ]);
     }
 }

@@ -1,6 +1,11 @@
 <template>
-    <div v-cloak id="app_layout">
-        <toast :toast="$page.props.toast"></toast>
+    <div id="app_layout">
+        <template v-if="$page.props.errors">
+            <toast-list :toast="$page.props.errors" :isError="true"></toast-list>
+        </template>
+        <template v-if="$page.props.success">
+            <toast-list :toast="$page.props.success" :isError="false"></toast-list>
+        </template>
         <jet-banner />
         <div class="bg-white h-full">
             <nav class="bg-green-500 border-b border-green-500">
@@ -156,7 +161,7 @@
     import JetNavLink from '@/Jetstream/NavLink'
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
     import Toast from "./../CustomComponents/Toast"
-
+    import ToastList from "./../CustomComponents/ToastList"
     export default {
         components: {
             JetApplicationMark,
@@ -166,6 +171,7 @@
             JetNavLink,
             JetResponsiveNavLink,
             Toast,
+            ToastList,
         },
         props: {
             isLoggedIn: Boolean,
