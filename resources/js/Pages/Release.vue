@@ -18,7 +18,7 @@
                 <span class="bottom-2 absolute">
                     <h5 class="text-white md:text-base text-xs">Community rating: </h5>
                     <p class="text-white md:text-base text-xs">
-                        0 <i class="fa fa-star" aria-hidden="true"></i> <small> from  ratings 0 </small>
+                        {{ rating_data.average }}  <i class="fa fa-star" aria-hidden="true"></i> <small> from  ratings {{ rating_data.count }} </small>
                     </p>
                 </span>
             </div>
@@ -42,32 +42,34 @@
                                                                                     $page.props.user.id"
                                     :release_id="release.id">
                 </rating-component>
+                <review-thread :reviews="rating_data.reviews"></review-thread>
             </div>
         </div>
     </app-layout>
 </template>
-
-<style scoped>
-
-</style>
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
     import CoverComponent from '../CustomComponents/CoverComponent.vue'
     import TrackList from '../CustomComponents/TrackList.vue'
     import RatingComponent from '../CustomComponents/RatingComponent.vue'
+    import Review from '../CustomComponents/Review.vue'
+    import ReviewThread from '../CustomComponents/ReviewThread.vue'
 
     export default {
         props:{
             release:Object,
             primary_artist:Object,
             user_rating_data:Object,
+            rating_data:Object,
         },
         components: {
             AppLayout,
             CoverComponent,
             TrackList,
-            RatingComponent
+            RatingComponent,
+            Review,
+            ReviewThread
         },
     }
 </script>

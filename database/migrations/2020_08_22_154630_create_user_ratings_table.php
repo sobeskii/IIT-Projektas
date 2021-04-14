@@ -15,8 +15,8 @@ class CreateUserRatingsTable extends Migration
     {
         Schema::create('user_ratings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->string('release_id')->unique();
+            $table->foreignId('user_id')->unique();
+            $table->string('release_id');
             $table->double('rating', 8, 2);
             $table->text('review')->nullable();
             $table->timestamps();

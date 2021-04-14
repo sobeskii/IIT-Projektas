@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLikesTable extends Migration
+class CreateLikedRatingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateLikesTable extends Migration
      */
     public function up()
     {
-        Schema::create('likes', function (Blueprint $table) {
+        Schema::create('liked_ratings', function (Blueprint $table) {
             $table->id();
-            $table->integer('likeable_id');
-            $table->string('likeable_type');
+            $table->integer('rating_id');
             $table->foreignId('user_id');
-            $table->boolean('isLiked')->default(true);
+            $table->boolean('is_like')->default(true);
         });
     }
 

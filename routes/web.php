@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LikedRatingsController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ReleaseController;
 use App\Http\Controllers\SearchController;
@@ -27,3 +28,5 @@ Route::get('/release/{spotifyId}',[ReleaseController::class,'index'])->name('rel
 
 Route::put('/rating/put',[RatingController::class, 'put'])->name('rating.put');
 Route::post('/rating/delete',[RatingController::class,'delete'])->name('rating.delete');
+
+Route::post('/toggle/{rating}' ,[LikedRatingsController::class,'toggle'])->name('like');

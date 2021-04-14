@@ -103,9 +103,6 @@ export default{
                 onSuccess: () => {
                     this.hideButtons();
                 },
-                onError: (errors) => {
-                    // Handle validation errors
-                },
             })
         },
         deleteRating(){
@@ -119,9 +116,6 @@ export default{
                         this.hideButtons();
                         this.reset();
                     },
-                    onError: () =>{
-
-                    }
                 },
             );
         },

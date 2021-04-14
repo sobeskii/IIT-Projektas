@@ -12,7 +12,7 @@ class RatingController extends Controller
 
     public function put(Request $request){
 
-        $request->validate( [   'review'        =>  'nullable|string|max:10000',
+        $request->validate( [   'review'        =>  'nullable|string|max:10000|min:10',
                                 'release_id'    =>  ['required','string',new ReleaseExists],
                                 'user_id'       =>  'required|integer|exists:users,id',
                                 'rating'        =>  'required|numeric|between:0.5,5'
