@@ -5,18 +5,18 @@
             <div class="w-full text-sm md:text-base px-2">
                 <div id="comment_header">
                     <strong id="username">{{ review.user.name }}</strong>,
-                    <small id="timespan" class="text-gray-500" > {{ formatDate }} </small>
-                    <small class="float-right text-muted -mt-2 lg:mt-0">
-                        <div :class="review.rating+'_rating'"  id="user_rated"></div>
+                    <small class="text-gray-500" > {{ formatDate }} </small>
+                    <small class="float-right text-muted -mt-2 lg:-mt-1">
+                        <div id="user_rating" :class="review.rating+'_rating'" ></div>
                     </small>
                 </div>
-                <div id="comment_body">
+                <div id="py-2">
                     {{ review.review }}
                 </div>
             </div>
             <div class="px-2">
                 <div class="w-full">
-                    <small class="comment_options">
+                    <small>
                        <like    :review="review"
                                 :reaction_type="true"
                                 :is_clicked="review.liked"
@@ -55,31 +55,23 @@ export default{
 }
 </script>
 <style scoped>
-.card-footer{
-    padding: 0;
-}
-#comment_header{
-    min-height: 30px;
-}
-
-#user_rated {
-    width: 100px;
-    height: 30px;
-}
-.upvote               { color: #0db031; }
-.downvote             { color: #d41717; }
-.comment_options      { cursor: pointer;}
-
-[class~="0_rating"] {background: url(../../../public/storage/assets/0s.png); }
-[class~="0.5_rating"] {background: url(../../../public/storage/assets/1s.png); }
-[class~="1_rating"] {background: url(../../../public/storage/assets/2s.png); }
-[class~="1.5_rating"] {background: url(../../../public/storage/assets/3s.png); }
-[class~="2_rating"] {background: url(../../../public/storage/assets/4s.png); }
-[class~="2.5_rating"] {background: url(../../../public/storage/assets/5s.png); }
-[class~="3_rating"] {background: url(../../../public/storage/assets/6s.png); }
-[class~="3.5_rating"] {background: url(../../../public/storage/assets/7s.png); }
-[class~="4_rating"] {background: url(../../../public/storage/assets/8s.png); }
-[class~="4.5_rating"] {background: url(../../../public/storage/assets/9s.png); }
-[class~="5_rating"] {background: url(../../../public/storage/assets/10s.png); }
+    #comment_header{
+        min-height: 30px;
+    }
+    #user_rating {
+        height: 30px;
+        width:100px;
+    }
+    [class~="0_rating"] {background: url(../../../public/storage/assets/0s.png); }
+    [class~="0.5_rating"] {background: url(../../../public/storage/assets/1s.png); }
+    [class~="1_rating"] {background: url(../../../public/storage/assets/2s.png); }
+    [class~="1.5_rating"] {background: url(../../../public/storage/assets/3s.png); }
+    [class~="2_rating"] {background: url(../../../public/storage/assets/4s.png); }
+    [class~="2.5_rating"] {background: url(../../../public/storage/assets/5s.png); }
+    [class~="3_rating"] {background: url(../../../public/storage/assets/6s.png); }
+    [class~="3.5_rating"] {background: url(../../../public/storage/assets/7s.png); }
+    [class~="4_rating"] {background: url(../../../public/storage/assets/8s.png); }
+    [class~="4.5_rating"] {background: url(../../../public/storage/assets/9s.png); }
+    [class~="5_rating"] {background: url(../../../public/storage/assets/10s.png); }
 </style>
 

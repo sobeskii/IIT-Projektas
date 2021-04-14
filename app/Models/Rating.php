@@ -13,6 +13,13 @@ class Rating extends Model
     //
     protected $fillable = [ 'rating','release_id', 'user_id', 'review' ];
 
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($rating) { // before delete() method call this
+            $rating->likes()->delete();
+        });
+    }
 
     /**
     * Get the user record associated with the rating.
@@ -26,10 +33,6 @@ class Rating extends Model
     * Get post like count
     */
     public function likeCount(){ return $this->likes()->count(); }
-    /**
-     * Delete by rating id
-     */
-    public static function deleteRatingById($id){  return Rating::find($id)->delete(); }
     /**
      *
      */
@@ -66,7 +69,9 @@ class Rating extends Model
         }])->
         withCasts(['liked' => 'boolean'])->
         withCasts(['disliked' => 'boolean'])->
-        with(['user'])->
+        with(['user' => function ($q) {
+            $q->select('id','name');
+        }])->
         where( 'review' , '!=' ,null );
     }
 }

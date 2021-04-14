@@ -4,7 +4,8 @@
             <span :id="getReactionType" :class="isActive" > </span>
         </template>
         <template v-else>
-            <inertia-link   preserve-scroll method="POST"
+            <inertia-link   class="cursor-pointer"
+                            preserve-scroll method="POST"
                             :href="route( 'like', review.id )"
                             :data="{ is_like : reaction_type }">
                 <span :id="getReactionType" :class="isActive" > </span>
@@ -26,42 +27,33 @@ export default{
         },
         isActive(){
             return this.reaction_type ? this.is_clicked  ?
-                                                            'active_green'  :   ''  :
-                                        this.is_clicked  ?   'active_red'    :   '';
+                                                             'text-green-500'  :   ''  :
+                                        this.is_clicked  ?   'text-red-600'    :   '';
         }
     }
 }
 </script>
 <style scoped>
-#thumbs-up,#thumbs-down{
-cursor:pointer;
-}
-.active_green {
-color:#32CD32;
-}
-.active_red {
-color:#FF0000;
-}
-#thumbs-up:hover {
-color:#32CD32;
-}
-#thumbs-down:hover {
-color:#FF0000;
-}
-#thumbs-up:before {
-content: "\f164";
-margin: 5px;
-font-size: 1em;
-font-weight: 200;
-font-family: "Font Awesome 5 Free";
-display: inline-block;
-}
-#thumbs-down:before {
-content: "\f165";
-margin: 5px;
-font-size: 1em;
-font-weight: 200;
-font-family: "Font Awesome 5 Free";
-display: inline-block;
-}
+    #thumbs-up:hover {
+        color:#32CD32;
+    }
+    #thumbs-down:hover {
+        color:#FF0000;
+    }
+    #thumbs-up:before {
+        content: "\f164";
+        margin: 5px;
+        font-size: 1em;
+        font-weight: 200;
+        font-family: "Font Awesome 5 Free";
+        display: inline-block;
+    }
+    #thumbs-down:before {
+        content: "\f165";
+        margin: 5px;
+        font-size: 1em;
+        font-weight: 200;
+        font-family: "Font Awesome 5 Free";
+        display: inline-block;
+    }
 </style>

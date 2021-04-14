@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Aerni\Spotify\Facades\SpotifyFacade as Spotify;
 use App\Models\Rating;

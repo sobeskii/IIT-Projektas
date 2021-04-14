@@ -106,11 +106,8 @@ export default{
             })
         },
         deleteRating(){
-            this.$inertia.post(route('rating.delete'),
-                {
-                    rating_id:this.rating_data.id,
-                    release_id:this.release_id,
-                },
+            this.$inertia.post(`rating/${this.rating_data.id}/delete`,
+                {   release_id:this.release_id,},
                 {
                     onSuccess: () =>{
                         this.hideButtons();
@@ -129,6 +126,7 @@ export default{
             $("#num_rating > small").text(0);
             this.setValue = null;
             this.form.rating = null;
+            this.form.review = null;
             this.isSet = false;
             this.hideButtons();
             $('input[name="rating"]').attr('checked', false);
