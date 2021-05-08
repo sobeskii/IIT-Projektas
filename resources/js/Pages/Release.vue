@@ -1,16 +1,24 @@
 <template>
     <app-layout>
-        <cover-component :artist_image="primary_artist.images[0].url">
+        <cover-component :cover="primary_artist.images[0].url">
             <div class="md:h-full md:w-40 w-20 h-full">
                 <img class="w-100 h-100 rounded-md" :src="release.images[0].url" />
             </div>
             <div class="flex-none w-1/2 overflow-hidden">
                 <span class="bottom-2 sm:absolute">
-                    <p class="whitespace-no-wrap text-white md:text-xl text-sm">{{ release.name }}</p>
+                    <p class="whitespace-no-wrap text-white md:text-xl text-sm">
+                        <a :href="release.external_urls['spotify']" target="_blank" class="text-green-500">
+                            <i class="fab fa-spotify" aria-hidden="true"></i>
+                        </a>
+                        {{ release.name }}
+                    </p>
                     <p class="whitespace-no-wrap text-xs md:text-base  text-white">
                         <template v-for="(artist) in release.artists" v-bind:key=artist>
-                            {{ artist.name }}&nbsp;
+                            <inertia-link :href="route('artist.index',artist.id)">
+                                {{ artist.name }}&nbsp;
+                            </inertia-link>
                         </template>
+
                     </p>
                 </span>
             </div>
@@ -40,7 +48,9 @@
                                     :loggedIn="$page.props.user.isLoggedIn"
                                     :user_id="($page.props.user.id == undefined) ?  null :
                                                                                     $page.props.user.id"
-                                    :release_id="release.id">
+                                    :release_id="release.id"
+                                    :artist_id="primary_artist.id"
+                                    >
                 </rating-component>
                 <review-thread :reviews="rating_data.reviews"></review-thread>
             </div>

@@ -13,8 +13,10 @@
         </td>
         <td class="px-5 py-5 border-b border-gray-200 lg:text-lg text-sm bg-white ">
             <p class="whitespace-no-wrap text-gray-500">
-                <template v-for="(artist) in data.artists" v-bind:key=artist>
-                    {{ artist.name }}&nbsp;
+                <template v-for="(artist) in data.artists" v-bind:key=artist.id>
+                    <inertia-link :href="route('artist.index',artist.id)">
+                        {{ artist.name }}&nbsp;
+                    </inertia-link>
                 </template>
             </p>
             <p class="whitespace-no-wrap text-gray-500 text-base">

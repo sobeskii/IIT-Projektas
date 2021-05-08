@@ -11,16 +11,7 @@ class Rating extends Model
 
     protected $table   = 'user_ratings';
     //
-    protected $fillable = [ 'rating','release_id', 'user_id', 'review' ];
-
-    public static function boot() {
-        parent::boot();
-
-        static::deleting(function($rating) { // before delete() method call this
-            $rating->likes()->delete();
-        });
-    }
-
+    protected $fillable = [ 'rating','release_id', 'user_id', 'review', 'artist_id' ];
     /**
     * Get the user record associated with the rating.
     */
@@ -38,40 +29,46 @@ class Rating extends Model
      */
     public static function getReleaseRatings($releaseId){  return Rating::where( 'release_id' , '=' ,$releaseId );  }
     /**
+     *
+     */
+    public static function getArtistsReleaseRatings($artistId){  return Rating::where( 'artist_id' , '=' ,$artistId );  }
+    /**
     * Get count of ratings on a release
     */
     public static function getRatingCount($releaseId){ return Rating::getReleaseRatings($releaseId)->count();   }
     /**
     * Compute and return rating average
     */
-    public static function ratingAverage($releaseId) {  return  ( Rating::getRatingCount($releaseId) != 0 ) ?
-                                                                ( Rating::getReleaseRatings($releaseId)->sum('rating') / Rating::getRatingCount($releaseId) ) : 0;
+    public static function ratingAverage($releaseId) {
+        $average = Rating::getReleaseRatings($releaseId)->avg('rating');
+        return  ($average == null) ?    0   :   $average;
     }
     /**
-    * Retrieve reviews of release
+    * Retrieve reviews of release with like counts and bool value if the user liked / disliked release
     */
-    public static function getReviews($releaseId)   {  return Rating::getReleaseRatings($releaseId)->
-        withCount([ 'likes as liked' => function ($q) {
+    public static function getReviews($releaseId)   {
+        return Rating::getReleaseRatings($releaseId)->
+            withCount([ 'likes as liked' => function ($q) {
+                    $q->where('user_id',auth()->id())->
+                        where('is_like',true);
+                }
+            ])->
+            withCount([ 'likes as disliked' => function ($q) {
                 $q->where('user_id',auth()->id())->
-                    where('is_like',true);
+                    where('is_like',false);
             }
-        ])->
-        withCount([ 'likes as disliked' => function ($q) {
-            $q->where('user_id',auth()->id())->
-                where('is_like',false);
-        }
-        ])->
-        withCount([ 'likes as like_count' => function ($q) {
-            $q->where('is_like',true);
-        }])->
-        withCount([ 'likes as dislike_count' => function ($q) {
-            $q->where('is_like',false);
-        }])->
-        withCasts(['liked' => 'boolean'])->
-        withCasts(['disliked' => 'boolean'])->
-        with(['user' => function ($q) {
-            $q->select('id','name');
-        }])->
-        where( 'review' , '!=' ,null );
+            ])->
+            withCount([ 'likes as like_count' => function ($q) {
+                $q->where('is_like',true);
+            }])->
+            withCount([ 'likes as dislike_count' => function ($q) {
+                $q->where('is_like',false);
+            }])->
+            withCasts(['liked' => 'boolean'])->
+            withCasts(['disliked' => 'boolean'])->
+            with(['user' => function ($q) {
+                $q->select('id','name');
+            }])->
+            where( 'review' , '!=' ,null );
     }
 }

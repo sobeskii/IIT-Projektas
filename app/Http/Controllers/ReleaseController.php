@@ -17,10 +17,9 @@ class ReleaseController extends Controller
      */
     public function index($releaseId)
     {
+        $release    =   Spotify::album($releaseId)->get();
 
-        $release = Spotify::album($releaseId)->get();
-
-        $artist = Spotify::artist($release['artists'][0]['id'])->get();
+        $artist     =   Spotify::artist($release['artists'][0]['id'])->get();
 
         $user            =      Auth::user();
         $userRating      =      (!Auth::guest())  ?  $user->getReleaseRating( $releaseId ) :  null;
@@ -31,14 +30,14 @@ class ReleaseController extends Controller
                                 ];
 
         return Inertia::render('Release',[
-            'release'                       =>      $release,
-            'primary_artist'                =>      $artist,
-            'user_rating_data'              =>      [
-                                                        'rating'    =>    ( $userRating != null )       ?   $userRating->rating : 0,
-                                                        'review'    =>    ( $userRating != null )       ?   $userRating->review : null,
-                                                        'id'        =>    ( $userRating != null)        ?   $userRating->id     : null,
-                                                    ],
-            'rating_data'                   =>      $rating_data,
+            'release'                       =>  fn()    =>      $release,
+            'primary_artist'                =>  fn()    =>      $artist,
+            'user_rating_data'              =>  fn()    =>      [
+                                                                    'rating'    =>    ( $userRating != null )       ?   $userRating->rating : 0,
+                                                                    'review'    =>    ( $userRating != null )       ?   $userRating->review : null,
+                                                                    'id'        =>    ( $userRating != null)        ?   $userRating->id     : null,
+                                                                ],
+            'rating_data'                   =>  fn()    =>      $rating_data,
         ]);
     }
 

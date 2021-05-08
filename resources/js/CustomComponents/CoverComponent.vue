@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="frame w-full h-80">
-            <img class="w-full object-cover object-center h-full" :src="artist_image" />
+            <img class="w-full object-cover object-center h-full" :src="cover" />
             <div class="cover_item">
                 <div class="max-w-5xl mx-auto flex m-2 px-3 justify-start h-full gap-5 flex-row">
                     <slot></slot>
@@ -13,7 +13,7 @@
 <script>
 export default{
     props:{
-        artist_image:String,
+        cover:String,
     }
 }
 </script>

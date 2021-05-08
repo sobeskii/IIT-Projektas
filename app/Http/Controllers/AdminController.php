@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -14,11 +15,11 @@ class AdminController extends Controller
 
     }
 
-    public function ban_user($userId){
+    public function ban_user(User $user){
 
     }
 
-    public function unban_user($userId){
+    public function unban_user(User $user){
 
     }
 }

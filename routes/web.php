@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtistController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,3 +31,8 @@ Route::put('release/rating/put',[RatingController::class, 'put'])->name('rating.
 Route::post('release/rating/{rating}/delete',[RatingController::class,'delete'])->name('rating.delete');
 
 Route::post('release/rating/{rating}/toggle/' ,[LikedRatingsController::class,'toggle'])->name('like');
+
+Route::get('/artist/{spotifyId}',[ArtistController::class,'index'])->name('artist.index');
+
+
+//Route::get('/artist/releases/{spotifyId}',[ArtistController::class,'getArtistReleases'])->name('artist.releases');

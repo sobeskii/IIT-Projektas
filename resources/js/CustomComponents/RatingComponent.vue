@@ -8,7 +8,7 @@
                         <small>{{ rating_data.rating }}</small>
                     </div>
                     <fieldset class="rating w-2/3 lg:w-1/2 md:w-2/3 sm:w-1/2 mb-3 float-left" :id="'rating_' + release_id">
-                        <template v-for="n in reverseKeys( 11 )" v-bind:key="n">
+                        <template v-for="n in reverseKeys" v-bind:key="n">
                             <template v-if="n != 0">
                                 <input  type="radio"
                                         :disabled="(loggedIn) ? false : true"
@@ -28,8 +28,8 @@
                         </template>
                     </fieldset>
                 </div>
-                <div class="hidden rate_options w-full">
-                    <div class="w-full p-3 hidden" id="review">
+                <div v-if="buttonsVisible" class="w-full">
+                    <div v-if="showTextArea" class="w-full p-3">
                         <textarea v-model="form.review" rows="5" class='w-full h-80' name="review">
                         </textarea>
   				    </div>
@@ -62,14 +62,16 @@ export default{
     props: {
         rating_data: Object,
         release_id: String,
-        loggedIn : Boolean,
-        user_id : Number,
+        artist_id: String,
+        user_id: Number,
+        loggedIn: Boolean,
     },
     setup () {
         const form = useForm({
             rating: null,
             review: null,
             release_id: null,
+            artist_id: null,
             user_id: null,
         })
         return { form }
@@ -77,24 +79,20 @@ export default{
     components:{
         JetButton
     },
-
     mounted(){
-        this.form.release_id = this.release_id;
-        this.form.user_id = this.user_id;
-        if(!this.loggedIn){
-            $(".submit_rating").remove();
-        }
+        this.loadFormElements
         if(this.rating_data.rating != 0){
             this.rate( this.rating_data.rating )
             $("input[name='rating'][value='" + this.rating_data.rating + "']").attr('checked','checked');
-            if(this.rating_data.review != null)
-                this.form.review = this.rating_data.review;
+            this.addExistingReviewText
         }
     },
     data(){
       return {
-        isSet : false,
-        setValue : 0,
+            isSet : false,
+            setValue : 0,
+            buttonsVisible: false,
+            showTextArea: false,
       }
     },
     methods: {
@@ -107,7 +105,10 @@ export default{
         },
         deleteRating(){
             this.$inertia.post(`rating/${this.rating_data.id}/delete`,
-                {   release_id:this.release_id,},
+                {
+                    release_id:this.release_id,
+                    artist_id:this.artist_id,
+                },
                 {
                     onSuccess: () =>{
                         this.hideButtons();
@@ -117,13 +118,13 @@ export default{
             );
         },
         rate( value ){
-            $("#num_rating > small").text(value);
+            this.rating_data.rating = value
             this.setValue = value;
             this.form.rating = value;
             this.isSet = true;
         },
         reset(){
-            $("#num_rating > small").text(0);
+            this.rating_data.rating = 0
             this.setValue = null;
             this.form.rating = null;
             this.form.review = null;
@@ -132,10 +133,10 @@ export default{
             $('input[name="rating"]').attr('checked', false);
         },
         showButtons() {
-            $(".rate_options").show();
+            this.buttonsVisible = true
         },
         hideButtons(){
-            $(".rate_options").hide();
+            this.buttonsVisible = false
         },
         showNumericValue( value ){
             $("#num_rating > small").text(value);
@@ -144,16 +145,27 @@ export default{
             let starRating = iteration * 0.5;
             return starRating;
         },
-        reverseKeys( n ) {
-            return [...Array(n).keys()].slice().reverse()
-        },
         toggleReviewTextArea(){
-            $("#review").toggle();
+            this.showTextArea = !this.showTextArea
         },
         redirectToLogin(){
             window.location.href = route('login')
         },
     },
+    computed:{
+        reverseKeys( ) {
+            return [...Array( 11 ).keys()].slice().reverse()
+        },
+        loadFormElements(){
+            this.form.release_id = this.release_id,
+            this.form.artist_id = this.artist_id,
+            this.form.user_id = this.user_id
+        },
+        addExistingReviewText(){
+            return (this.rating_data.review != null)    ?   this.form.review = this.rating_data.review   :
+                                                            null;
+        }
+    }
 }
 </script>
 <style scoped>
