@@ -2,10 +2,10 @@
     <app-layout>
         <cover-component :cover="primary_artist.images[0].url">
             <div class="md:h-full md:w-40 w-20 h-full">
-                <img class="w-100 h-100 rounded-md" :src="release.images[0].url" />
+                <img class="w-100 h-100 rounded-md" :src="release.images[1].url" />
             </div>
             <div class="flex-none w-1/2 overflow-hidden">
-                <span class="bottom-2 sm:absolute">
+                <span class="bottom-2 sm:absolute sm:w-2/6">
                     <p class="whitespace-no-wrap text-white md:text-xl text-sm">
                         <a :href="release.external_urls['spotify']" target="_blank" class="text-green-500">
                             <i class="fab fa-spotify" aria-hidden="true"></i>

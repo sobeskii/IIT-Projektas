@@ -5,10 +5,9 @@
                 Search for releases
             </h2>
         </template>
-        <div class="max-w-lg lg:max-w-5xl rounded-sm mx-auto p-2 sm:p-8 h-full" >
+        <div class="max-w-lg lg:max-w-6xl rounded-sm mx-auto p-2 sm:p-8 h-full" >
             <custom-table :hasRecords="albums.items.length > 0"
-                            divClass="container mx-auto sm:px-8 relative h-full"
-                            animationType="all 0.5s ease" >
+                            divClass="container mx-auto sm:px-8 relative h-full">
 
                 <template v-slot:search_input>
                     <span class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
@@ -57,11 +56,13 @@
                     </th>
                 </template>
                 <template v-slot:content>
-                    <template v-for="album in albums.items" v-bind:key=album.id>
-                        <release-table-content :data="album" ></release-table-content>
-                    </template>
+                    <transition-group name="list">
+                        <template v-for="album in albums.items" :key="album.id">
+                            <release-table-content :data="album" ></release-table-content>
+                        </template>
+                    </transition-group>
                 </template>
-                <template v-if="albums.total > this.perPage" v-slot:pagination>
+                <template v-if="albums.total > perPage" v-slot:pagination>
                     <pagination :paginationNext="nextPage" :paginationPrevious="previousPage" >
                         <template v-slot:entrycount>
                             {{ parseEntryCount }}
@@ -101,7 +102,7 @@ export default {
     },
     methods:{
         search:_.throttle(function(){
-            this.$inertia.replace(route('search.index',{
+            this.$inertia.get(route('search.index',{
                     term:this.term,
                     offset:this.offset,
                     perPage:this.perPage
@@ -166,4 +167,14 @@ export default {
     },
 }
 </script>
-
+<style scoped>
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+</style>

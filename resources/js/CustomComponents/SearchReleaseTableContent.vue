@@ -5,7 +5,7 @@
                 <div class="flex-shrink-0 lg:w-36 lg:h-36 w-20 h-20">
                     <inertia-link :href="route('release.index',data.id)">
                         <img class="w-full h-full rounded-md"
-                        :src="data.images[0]['url']"
+                        :src="data.images[1]['url']"
                         alt="" />
                     </inertia-link>
                 </div>

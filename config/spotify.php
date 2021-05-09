@@ -27,9 +27,9 @@ return [
     */
 
     'default_config' => [
-        'country' => null,
-        'locale' => null,
-        'market' => null,
+        'country' => 'US',
+        'locale' => 'en_US',
+        'market' => 'US',
     ],
 
 ];

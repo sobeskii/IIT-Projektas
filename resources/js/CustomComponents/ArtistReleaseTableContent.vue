@@ -5,11 +5,11 @@
                 <inertia-link :href="route('release.index',data.id)" class="flex items-center overflow-ellipsis">
                     <div class="flex-shrink-0 lg:w-18 lg:h-18 w-10 h-10">
                             <img class="w-full h-full rounded-md"
-                            :src="data.images[0]['url']"
+                            :src="data.images[2]['url']"
                             alt="" />
                     </div>
                     <div>
-                    <p class="text-gray-900 whitespace-no-wrap px-4 ">{{data.name}}</p>
+                    <p class="text-gray-900 whitespace-no-wrap px-4">{{data.name}}</p>
                     <p class="text-gray-500 whitespace-no-wrap px-4"><small> {{data.release_date}} </small></p>
                     </div>
                 </inertia-link>
@@ -34,13 +34,11 @@
     </tr>
 </template>
 <script>
+
 export default {
     props:{
         data:Object,
-        listClass:{
-            default:'',
-            type:String
-        }
     },
+
 }
 </script>

@@ -20,14 +20,23 @@ class SearchController extends Controller
         $perPage    =   ($request->perPage) != null ? (int)$request->perPage : 15;
 
         return Inertia::render('Search',[
-            'albums'        =>      Spotify::searchAlbums($term)->offset($offset)
-                                                                ->limit($perPage)
-                                                                ->get()['albums'],
-            'request_items' =>  ['term'     =>  $term,
-                                 'offset'   =>  $offset,
-                                 'perPage'  =>  $perPage,
-                                ],
+            'albums'        =>      fn  ()  =>  $this->getReleases($term,$offset,$perPage),
+            'request_items' =>      fn  ()  =>  ['term'     =>  $term,
+                                                 'offset'   =>  $offset,
+                                                 'perPage'  =>  $perPage,
+                                                ],
         ]);
     }
+    private function getReleases($term,$offset,$perPage){
 
+        $releases =  Spotify::searchAlbums($term)->offset($offset)
+                                                 ->limit($perPage)
+                                                 ->get()['albums'];
+
+        // Locale setting seems to be broken in the API itself.
+        // Get unique releases to avoid clutter.
+        $releases['items']  =   collect($releases['items'])->unique('name')->values();
+
+        return $releases;
+    }
 }

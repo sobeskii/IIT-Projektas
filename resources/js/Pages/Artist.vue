@@ -15,16 +15,15 @@
                 </span>
             </div>
         </cover-component>
-            <div class="max-w-5xl mx-auto flex m-2 px-3 justify-start my-4 flex-wrap flex-row mt-1 md:mt-2">
-                <p class="text-base md:text-xl my-2">Releases:</p>
+            <div class="max-w-5xl mx-auto flex m-2 px-3 justify-start my-2 flex-wrap flex-row mt-1">
+                <p class="text-base md:text-xl my-1">Releases:</p>
                 <custom-table   divClass="container mx-auto relative h-full"
-                                :searchOptions="false"
-                                animationType="all 1s ease" >
+                                :searchOptions="false" >
 
                     <template v-slot:head >
                         <th
                             class="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase md:w-2/3  w-1/2 tracking-wider">
-                            Album
+                            Release name
                         </th>
                         <th
                             class="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase w-1/4  tracking-wider">
@@ -42,9 +41,11 @@
                         </th>
                     </template>
                     <template v-slot:content>
-                        <template v-for="release in dataSlice" v-bind:key="release.id" >
-                            <artist-release-content :data="release"></artist-release-content>
-                        </template>
+                        <transition-group name="list">
+                            <template v-for="release in dataSlice" :key="release.id" >
+                                <artist-release-content :data="release"></artist-release-content>
+                            </template>
+                        </transition-group>
                     </template>
                     <template v-if="releasesToShow < artist_releases.length" v-slot:pagination>
                         <load-more :loadMore="LoadMoreReleases">
@@ -112,4 +113,15 @@
         }
     }
 </script>
+<style scoped>
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+</style>
 

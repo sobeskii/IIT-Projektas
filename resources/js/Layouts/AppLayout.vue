@@ -168,6 +168,7 @@
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
     import Toast from "./../CustomComponents/Toast"
     import ToastList from "./../CustomComponents/ToastList"
+
     export default {
         components: {
             JetApplicationMark,
@@ -178,6 +179,7 @@
             JetResponsiveNavLink,
             Toast,
             ToastList,
+
         },
         props: {
             isLoggedIn: Boolean,
