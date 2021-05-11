@@ -18,7 +18,6 @@
                                 {{ artist.name }}&nbsp;
                             </inertia-link>
                         </template>
-
                     </p>
                 </span>
             </div>
@@ -26,7 +25,7 @@
                 <span class="bottom-2 absolute">
                     <h5 class="text-white md:text-base text-xs">Community rating: </h5>
                     <p class="text-white md:text-base text-xs">
-                        {{ rating_data.average }}  <i class="fa fa-star" aria-hidden="true"></i> <small> from  ratings {{ rating_data.count }} </small>
+                        {{ ratingAverage }}  <i class="fa fa-star" aria-hidden="true"></i> <small> from  ratings {{ rating_data.count }} </small>
                     </p>
                 </span>
             </div>
@@ -52,7 +51,7 @@
                                     :artist_id="primary_artist.id"
                                     >
                 </rating-component>
-                <review-thread :reviews="rating_data.reviews"></review-thread>
+            <review-thread :loadMore="LoadMoreReviews" :reviewsShowing="reviewsToShow" :reviews="rating_data.reviews"></review-thread>
             </div>
         </div>
     </app-layout>
@@ -63,7 +62,6 @@
     import CoverComponent from '../CustomComponents/CoverComponent.vue'
     import TrackList from '../CustomComponents/TrackList.vue'
     import RatingComponent from '../CustomComponents/RatingComponent.vue'
-    import Review from '../CustomComponents/Review.vue'
     import ReviewThread from '../CustomComponents/ReviewThread.vue'
 
     export default {
@@ -78,9 +76,23 @@
             CoverComponent,
             TrackList,
             RatingComponent,
-            Review,
             ReviewThread
         },
+        data(){
+            return {
+                reviewsToShow: 5,
+            }
+        },
+        methods:{
+            LoadMoreReviews(){
+                this.reviewsToShow  +=  5
+            }
+        },
+        computed:{
+            ratingAverage(){
+                return Number((this.rating_data.average).toFixed(2));
+            }
+        }
     }
 </script>
 

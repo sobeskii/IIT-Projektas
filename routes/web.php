@@ -9,6 +9,7 @@ use App\Http\Controllers\LikedRatingsController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\ReleaseController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +35,6 @@ Route::post('release/rating/{rating}/toggle/' ,[LikedRatingsController::class,'t
 
 Route::get('/artist/{spotifyId}',[ArtistController::class,'index'])->name('artist.index');
 
+Route::get('/user/reactions',[UserController::class,'show_reactions'])->name('user.reactions');
+Route::get('/user/ratings',[UserController::class,'show_ratings'])->name('user.ratings');
 
-//Route::get('/artist/releases/{spotifyId}',[ArtistController::class,'getArtistReleases'])->name('artist.releases');

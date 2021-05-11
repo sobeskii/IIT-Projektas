@@ -5,6 +5,7 @@
         </template>
         <template v-else>
             <inertia-link   class="cursor-pointer"
+                            as="button"
                             preserve-scroll method="POST"
                             :href="route( 'like', review.id )"
                             :data="{ is_like : reaction_type }">
@@ -56,4 +57,5 @@ export default{
         font-family: "Font Awesome 5 Free";
         display: inline-block;
     }
+
 </style>

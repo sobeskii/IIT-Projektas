@@ -6,7 +6,7 @@ use Inertia\Inertia;
 use Aerni\Spotify\Facades\SpotifyFacade as Spotify;
 use App\Models\Rating;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Http\Request;
 
 class ReleaseController extends Controller
 {
@@ -15,8 +15,11 @@ class ReleaseController extends Controller
      *
      * @return Inertia\Inertia;
      */
-    public function index($releaseId)
+    public function index($releaseId, Request $request)
     {
+
+        $numberToShow       =   ($request->numberToShow) != null ? $request->numberToShow :     5;
+
         $release    =   Spotify::album($releaseId)->get();
 
         $artist     =   Spotify::artist($release['artists'][0]['id'])->get();
@@ -26,7 +29,7 @@ class ReleaseController extends Controller
         $rating_data     =      [
                                     'average'   =>      Rating::ratingAverage($releaseId),
                                     'count'     =>      Rating::getRatingCount($releaseId),
-                                    'reviews'   =>      (Rating::getReviews($releaseId)->get()) ? Rating::getReviews($releaseId)->get() : null,
+                                    'reviews'   =>      Rating::getReviews($releaseId)->get(),
                                 ];
 
         return Inertia::render('Release',[

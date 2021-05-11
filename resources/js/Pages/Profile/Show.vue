@@ -4,6 +4,17 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Profile
             </h2>
+            <div class="flex mt-2">
+                <inertia-link :href="route('profile.show')" class="font-semibold pr-2 text-base text-gray-500 leading-tight">
+                    Settings
+                </inertia-link> &nbsp;
+                <inertia-link :href="route('user.reactions')" class="font-semibold px-2 text-base text-gray-500 leading-tight">
+                    Reactions
+                </inertia-link> &nbsp;
+                <inertia-link :href="route('user.ratings')" class="font-semibold px-2 text-base text-gray-500 leading-tight">
+                    Reviews and ratings
+                </inertia-link>
+            </div>
         </template>
 
         <div>
@@ -46,6 +57,8 @@
     import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm'
     import UpdatePasswordForm from './UpdatePasswordForm'
     import UpdateProfileInformationForm from './UpdateProfileInformationForm'
+    import JetNavLink from '@/Jetstream/NavLink'
+
 
     export default {
         props: ['sessions'],
@@ -58,6 +71,7 @@
             TwoFactorAuthenticationForm,
             UpdatePasswordForm,
             UpdateProfileInformationForm,
+            JetNavLink,
         },
     }
 </script>

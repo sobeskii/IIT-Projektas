@@ -16,14 +16,14 @@
             </div>
         </td>
         <td class="px-2 py-2 border-b border-gray-200 bg-white sm:text-sm text-xs">
-            <small class="text-gray-400" >({{ data.album_type }})</small>
+            <small class="text-gray-500" >({{ data.album_type }})</small>
         </td>
         <td class="px-2 py-2 border-b hidden sm:table-cell border-gray-200 bg-white sm:text-sm text-xs">
-            <small class="text-gray-400">{{ data.rating_count }}</small>
+            <small class="text-gray-500">{{ data.rating_count }}</small>
         </td>
         <td class="px-2 py-2 border-b border-gray-200 bg-white sm:text-sm text-xs">
             <p class="capitalize text-gray-500 whitespace-no-wrap">
-                {{ data.rating_average }}  <i class="fa fa-star text-yellow-300" aria-hidden="true"></i>
+                {{ ratingAverage }}  <i class="fa fa-star text-yellow-300" aria-hidden="true"></i>
             </p>
         </td>
         <td class="px-2 py-2 border-b border-gray-200 bg-white sm:text-sm text-sm">
@@ -39,6 +39,10 @@ export default {
     props:{
         data:Object,
     },
-
+    computed:{
+        ratingAverage(){
+            return Number((this.data.rating_average).toFixed(2));
+        }
+    }
 }
 </script>

@@ -50,14 +50,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = [
-        'profile_photo_url',
-    ];
+     * Get the rating record associated with the user.
+    */
+    public function likes() {   return $this->hasMany('App\Models\LikedRating');  }
     /**
      * Get the rating record associated with the user.
     */
@@ -74,4 +71,5 @@ class User extends Authenticatable
      * Check if user has rated specific release
     */
     public function isReleaseRated( $release )  {  return (  $this->ratings()->firstWhere( 'release_id', $release ) != null ) ? true : false; }
+
 }

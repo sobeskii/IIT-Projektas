@@ -12,4 +12,12 @@ class LikedRating extends Model
 
     protected $fillable = [ 'user_id','rating_id' , 'is_like' ];
 
+    /**
+    * Get the user record associated with the rating.
+    */
+    public function user() { return $this->belongsTo('App\Models\User'); }
+    /**
+    * Get the user record associated with the rating.
+    */
+    public function rating() { return $this->belongsTo('App\Models\Rating'); }
 }

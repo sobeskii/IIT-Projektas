@@ -7,6 +7,10 @@ use App\Models\Rating;
 
 class LikedRatingsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function toggle(Rating $rating,Request $request){
 
         if ($rating->likes()->where('user_id',auth()->id())->

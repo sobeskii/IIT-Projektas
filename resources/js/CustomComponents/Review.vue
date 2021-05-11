@@ -2,19 +2,39 @@
 <div class="w-full mx-auto">
     <div class="flex w-full">
         <div class="w-full border-gray-300 border-b py-2">
-            <div class="w-full text-sm md:text-base px-2">
-                <div id="comment_header">
-                    <strong id="username">{{ review.user.name }}</strong>,
-                    <small class="text-gray-500" > {{ formatDate }} </small>
-                    <small class="float-right text-muted -mt-2 lg:-mt-1">
-                        <div id="user_rating" :class="review.rating+'_rating'" ></div>
-                    </small>
+            <!-- Add link to release page if the ratings review is in User reaction page -->
+            <template v-if="belongsToUserProfileReaction">
+                <inertia-link :href="route('release.index',review.release_id)">
+                    <div class="w-full text-sm md:text-base px-2">
+                        <div id="comment_header">
+                            <strong id="username">{{ review.user.name }}</strong>,
+                            <small class="text-gray-500" > {{ formatDate }} </small>
+                            <small class="float-right text-muted -mt-2 lg:-mt-1">
+                                <div id="user_rating" :class="review.rating+'_rating'" ></div>
+                            </small>
+                        </div>
+                        <div id="py-2" v-if="review.review != null">
+                            {{ review.review }}
+                        </div>
+                    </div>
+                </inertia-link>
+            </template>
+            <!-- Show rating with a review normally -->
+            <template v-else>
+                <div class="w-full text-sm md:text-base px-2">
+                    <div id="comment_header">
+                        <strong id="username">{{ review.user.name }}</strong>,
+                        <small class="text-gray-500" > {{ formatDate }} </small>
+                        <small class="float-right text-muted -mt-2 lg:-mt-1">
+                            <div id="user_rating" :class="review.rating+'_rating'" ></div>
+                        </small>
+                    </div>
+                    <div id="py-2">
+                        {{ review.review }}
+                    </div>
                 </div>
-                <div id="py-2">
-                    {{ review.review }}
-                </div>
-            </div>
-            <div class="px-2">
+            </template>
+            <div class="px-2" v-if="review.review != null" >
                 <div class="w-full">
                     <small>
                        <like    :review="review"
@@ -43,6 +63,10 @@ import Like from './Like.vue'
 export default{
     props:{
         review: Object,
+        belongsToUserProfileReaction: {
+            type:Boolean,
+            default:false,
+        },
     },
     components:{
         Like
@@ -73,5 +97,6 @@ export default{
     [class~="4_rating"] {background: url(../../../public/storage/assets/8s.png); }
     [class~="4.5_rating"] {background: url(../../../public/storage/assets/9s.png); }
     [class~="5_rating"] {background: url(../../../public/storage/assets/10s.png); }
+
 </style>
 
