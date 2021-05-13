@@ -21,31 +21,30 @@ class ArtistController extends Controller
     }
 
     private function getArtistReleases($artistId){
-
         // Get initial data of releases (total)
         $releases = Spotify::artistAlbums($artistId)->includeGroups('album,single')
                                                     ->limit(50)
                                                     ->get();
 
-        $all_api_data = [$releases];
+        $all_releases = [];
+        $all_releases = array_merge($all_releases,$releases['items']);
 
         // Get the rest of release data
-        for ($i=50; $i < $releases['total']; $i+=50)
-            $all_api_data[] = Spotify::artistAlbums($artistId)->includeGroups('album,single')->limit(50)->offset($i)->get();
+        //Put all release data into one array
 
-        // Put all album data to one array
-        foreach ($all_api_data as $value)
-            $all_releases[] = $value['items'];
+        for ($i=50; $i < $releases['total']; $i+=50){
+            $items = Spotify::artistAlbums($artistId)->includeGroups('album,single')->limit(50)->offset($i)->get()['items'];
+            $all_releases = array_merge($all_releases,$items);
+        }
 
-
+        // Locale setting seems to be broken in the API itself
+        // Get unique releases to avoid clutter
         // Add rating information values to each release
-        // Locale setting seems to be broken in the API itself.
-        // Get unique releases to avoid clutter.
-        $all_releases = collect($all_releases[0])->map(function ($value){
-            $value['rating_average']    =   Rating::ratingAverage($value['id']);
+        $all_releases = collect($all_releases)->unique('name')->map(function ($value){
+            $value['rating_average']    =   Rating::getRatingAverage($value['id']);
             $value['rating_count']      =   Rating::getRatingCount($value['id']);
             return $value;
-        })->unique('name')->values();
+        })->values();
 
         return $all_releases;
     }

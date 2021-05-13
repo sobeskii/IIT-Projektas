@@ -16,11 +16,13 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         $term       =   ($request->term) != null ? $request->term : ' ';
-        $offset     =   ($request->offset) != null && $request->offset > 0 ? (int)$request->offset : 0;
-        $perPage    =   ($request->perPage) != null ? (int)$request->perPage : 15;
+        $offset     =   (($request->offset) != null && $request->offset >= 0 && $request->offset <= 20 && $request->offset >= 5)   ? (int)$request->offset : 0;
+        $perPage    =   (($request->perPage) != null && $request->perPage <= 20 && $request->perPage >= 5) ? (int)$request->perPage : 15;
+
+        $releases   =   $this->getReleases($term,$offset,$perPage);
 
         return Inertia::render('Search',[
-            'albums'        =>      fn  ()  =>  $this->getReleases($term,$offset,$perPage),
+            'albums'        =>      fn  ()  =>  $releases,
             'request_items' =>      fn  ()  =>  ['term'     =>  $term,
                                                  'offset'   =>  $offset,
                                                  'perPage'  =>  $perPage,

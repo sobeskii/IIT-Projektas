@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\Redirect;
 
 class RatingController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function put(Request $request){
 
         $request->validate( [   'review'        =>  'nullable|string|max:10000|min:5',

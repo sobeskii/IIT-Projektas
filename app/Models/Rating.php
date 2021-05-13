@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Rating extends Model
 {
@@ -25,12 +26,12 @@ class Rating extends Model
     */
     public function likeCount(){ return $this->likes()->count(); }
     /**
-     *
-     */
+    *
+    */
     public static function getReleaseRatings($releaseId){  return Rating::where( 'release_id' , '=' ,$releaseId );  }
     /**
-     *
-     */
+    *
+    */
     public static function getArtistsReleaseRatings($artistId){  return Rating::where( 'artist_id' , '=' ,$artistId );  }
     /**
     * Get count of ratings on a release
@@ -39,29 +40,39 @@ class Rating extends Model
     /**
     * Compute and return rating average
     */
-    public static function ratingAverage($releaseId) {
+    public static function getRatingAverage($releaseId) {
         $average = Rating::getReleaseRatings($releaseId)->avg('rating');
         return  ($average == null) ?    0   :   $average;
     }
     /**
-     * Compute the like and dislike count and determine if logged in user has liked or disliked the review
-     */
+    * Compute the like and dislike count and determine if logged in user has liked or disliked the review
+    */
     public function scopecomputeRatingInfo($query){
         return $query->withCount([ 'likes as liked' => function ($q) {
-            $q->where('user_id',auth()->id())->
-                where('is_like',true);
-        }])->withCount([ 'likes as disliked' => function ($q) {
-            $q->where('user_id',auth()->id())->
-                where('is_like',false);
-        }])->withCasts(['liked' => 'boolean'])->
-        withCasts(['disliked' => 'boolean'])->
-        withCount([ 'likes as like_count' => function ($q) {
-            $q->where('is_like',true);
-        }])->
-        withCount([ 'likes as dislike_count' => function ($q) {
-            $q->where('is_like',false);
-        }]);
+                    $q->where('user_id',auth()->id())->
+                        where('is_like',true);
+                }])->withCount([ 'likes as disliked' => function ($q) {
+                    $q->where('user_id',auth()->id())->
+                        where('is_like',false);
+                }])->withCasts(['liked' => 'boolean'])->
+                withCasts(['disliked' => 'boolean'])->
+                withCount([ 'likes as like_count' => function ($q) {
+                    $q->where('is_like',true);
+                }])->
+                withCount([ 'likes as dislike_count' => function ($q) {
+                    $q->where('is_like',false);
+                }]);
     }
+    /*
+    *
+    */
+    public static function getBestRatedReleaseIds(){
+        return Rating::select(DB::raw('release_id, AVG(rating) as average , COUNT(release_id) as count'))
+                                ->groupBy('release_id')
+                                ->orderBy('average', 'DESC')
+                                ->orderBy('count', 'DESC');
+    }
+
     /**
     * Retrieve reviews of release with like counts and bool value if the user liked / disliked review
     */
@@ -72,7 +83,6 @@ class Rating extends Model
                                         }])->where( 'review' , '!=' ,null )
                                            ->orderBy('created_at','desc');
     }
-
     /**
     * Retrieve reviews which user has liked/disliked with like counts and bool value if the user liked / disliked review
     */

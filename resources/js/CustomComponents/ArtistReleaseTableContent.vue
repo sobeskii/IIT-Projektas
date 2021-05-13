@@ -27,7 +27,7 @@
             </p>
         </td>
         <td class="px-2 py-2 border-b border-gray-200 bg-white sm:text-sm text-sm">
-            <a :href="data.external_urls['spotify']" target="_blank" class="text-green-500">
+            <a rel="noreferrer" :href="data.external_urls['spotify']" target="_blank" class="text-green-500">
                 <i class="fab fa-spotify" aria-hidden="true"></i>
             </a>
         </td>

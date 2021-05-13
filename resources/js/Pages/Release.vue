@@ -7,7 +7,7 @@
             <div class="flex-none w-1/2 overflow-hidden">
                 <span class="bottom-2 sm:absolute sm:w-2/6">
                     <p class="whitespace-no-wrap text-white md:text-xl text-sm">
-                        <a :href="release.external_urls['spotify']" target="_blank" class="text-green-500">
+                        <a rel="noreferrer" :href="release.external_urls['spotify']" target="_blank" class="text-green-500">
                             <i class="fab fa-spotify" aria-hidden="true"></i>
                         </a>
                         {{ release.name }}

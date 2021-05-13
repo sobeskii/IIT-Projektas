@@ -1,11 +1,11 @@
 <template>
-    <div class="my-2 px-4 sm:px-8  flex sm:flex-row flex-col" v-if="searchOptions">
+    <div class="my-2 px-4 sm:px-8  flex sm:flex-row flex-col">
         <div class="flex flex-row mb-1 sm:mb-0">
             <div class="relative">
                 <slot name="selection"></slot>
             </div>
         </div>
-        <div class="block relative">
+        <div class="block relative" v-if="searchOptions">
             <slot name="search_input"> </slot>
         </div>
     </div>
@@ -22,7 +22,7 @@
                         <slot name="content"></slot>
                     </tbody>
                 </table>
-                <slot name="pagination" v-if="hasRecords"></slot>
+                <slot name="pagination" v-if="hasRecords && hasPagination"></slot>
             </div>
         </div>
         <not-found-error icon='fa fa-search'
@@ -43,6 +43,10 @@ export default {
             default: true,
         },
         searchOptions:{
+            type:Boolean,
+            default:true,
+        },
+        hasPagination:{
             type:Boolean,
             default:true,
         },

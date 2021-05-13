@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use Aerni\Spotify\Facades\SpotifyFacade as Spotify;
 use App\Models\Rating;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReleaseController extends Controller
 {
@@ -15,11 +15,8 @@ class ReleaseController extends Controller
      *
      * @return Inertia\Inertia;
      */
-    public function index($releaseId, Request $request)
+    public function index($releaseId)
     {
-
-        $numberToShow       =   ($request->numberToShow) != null ? $request->numberToShow :     5;
-
         $release    =   Spotify::album($releaseId)->get();
 
         $artist     =   Spotify::artist($release['artists'][0]['id'])->get();
@@ -27,7 +24,7 @@ class ReleaseController extends Controller
         $user            =      Auth::user();
         $userRating      =      (!Auth::guest())  ?  $user->getReleaseRating( $releaseId ) :  null;
         $rating_data     =      [
-                                    'average'   =>      Rating::ratingAverage($releaseId),
+                                    'average'   =>      Rating::getRatingAverage($releaseId),
                                     'count'     =>      Rating::getRatingCount($releaseId),
                                     'reviews'   =>      Rating::getReviews($releaseId)->get(),
                                 ];
@@ -44,8 +41,26 @@ class ReleaseController extends Controller
         ]);
     }
 
-    public function show_chart(){
+    public function show_chart(Request $request)
+    {
+        $perPage    =   (($request->perPage) != null && $request->perPage <= 20 && $request->perPage >= 5) ? (int)$request->perPage : 15;
+        $releases   =   $this->getBestRatedReleases($perPage);
 
+
+        return Inertia::render('Chart',[
+            'releases'      =>      $releases,
+            'request_items' =>      fn()    =>  [   'perPage'  =>  $perPage,    ],
+        ]);
+    }
+
+    private function getBestRatedReleases($perPage) {
+        $releases    =   Rating::getBestRatedReleaseIds()->paginate($perPage);
+
+        foreach ($releases as $release) {
+            $release['release']  =   Spotify::album($release['release_id'])->get();
+        }
+
+        return $releases;
     }
 }
 

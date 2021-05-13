@@ -33373,19 +33373,6 @@ select {
   --tw-backdrop-sepia: sepia(100%);
 }
 
-body,#app,#app_layout {
-  height: 100%;
-}
-
-body{
-  margin:0px;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

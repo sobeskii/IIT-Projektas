@@ -28,7 +28,7 @@ export default{
         },
         isActive(){
             return this.reaction_type ? this.is_clicked  ?
-                                                             'text-green-500'  :   ''  :
+                                                             'text-green-600'  :   ''  :
                                         this.is_clicked  ?   'text-red-600'    :   '';
         }
     }
@@ -36,7 +36,7 @@ export default{
 </script>
 <style scoped>
     #thumbs-up:hover {
-        color:#32CD32;
+        color:#008000;
     }
     #thumbs-down:hover {
         color:#FF0000;

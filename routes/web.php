@@ -27,6 +27,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search',[SearchController::class,'index'])->name('search.index');
 
 Route::get('/release/{spotifyId}',[ReleaseController::class,'index'])->name('release.index');
+Route::get('/releases/chart',[ReleaseController::class,'show_chart'])->name('release.chart');
+
 
 Route::put('release/rating/put',[RatingController::class, 'put'])->name('rating.put');
 Route::post('release/rating/{rating}/delete',[RatingController::class,'delete'])->name('rating.delete');

@@ -57,9 +57,7 @@
                 </template>
                 <template v-slot:content>
                     <transition-group name="list">
-                        <template v-for="album in albums.items" :key="album.id">
-                            <release-table-content :data="album" ></release-table-content>
-                        </template>
+                        <release-table-content v-for="album in albums.items" :key="album.id" :data="album" ></release-table-content>
                     </transition-group>
                 </template>
                 <template v-if="albums.total > perPage" v-slot:pagination>

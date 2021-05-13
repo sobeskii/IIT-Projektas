@@ -7,8 +7,8 @@
             <toast-list :toast="$page.props.success" :isError="false"></toast-list>
         </template>
         <jet-banner />
-        <div class="bg-white h-full">
-            <nav class="bg-green-500 border-b border-green-500">
+        <div class="bg-white h-full flex flex-col min-h-screen">
+            <nav class="bg-green-600 border-b border-green-500">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -16,7 +16,7 @@
                             <!-- Logo -->
                             <div class="flex-shrink-0 flex items-center">
                                 <inertia-link :href="route('home')">
-                                    <jet-application-mark class="block h-9 w-9" />
+                                    <jet-application-mark class="block h-9 w-9 hover:opacity-75" />
                                 </inertia-link>
                             </div>
 
@@ -28,7 +28,7 @@
                             </div>
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
-                                <jet-nav-link :href="route('search.index')" :active="false">
+                                <jet-nav-link :href="route('release.chart')" :active="false">
                                     Charts
                                 </jet-nav-link>
                             </div>
@@ -45,7 +45,7 @@
                                         </button>
 
                                         <span v-else class="inline-flex rounded-md">
-                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-500 hover:text-gray-200 focus:outline-none transition ease-in-out duration-75">
+                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:text-gray-200 focus:outline-none transition ease-in-out duration-75">
                                                 {{ $page.props.user.name }}
 
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -104,8 +104,11 @@
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
-                        <jet-responsive-nav-link :active="true" :href="route('search.index')" >
+                        <jet-responsive-nav-link :active="false" :href="route('search.index')" >
                             Search
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link :active="false" :href="route('release.chart')" >
+                            Charts
                         </jet-responsive-nav-link>
                     </div>
                     <!-- Responsive Settings Options -->
@@ -152,9 +155,24 @@
             </header>
 
             <!-- Page Content -->
-            <main class="h-4/5 sm:pb-8 pb-4">
+            <main class="h-4/5 sm:pb-8 pb-4 mb-2">
                 <slot></slot>
             </main>
+            <footer class="footer text-xs sm:text-sm bg-green-600 flex flex-wrap items-center justify-between p-3 mt-auto">
+                <div class="container mx-auto flex flex-col flex-wrap items-center justify-between">
+                    <ul class="flex mx-auto text-white text-center">
+                    <li class="px-2 cursor-pointer hover:underline">Terms & Conditions</li>
+                    <li class="px-2 cursor-pointer hover:underline">Privacy</li>
+                    <li class="px-2 cursor-pointer hover:underline">Cookies</li>
+                    </ul>
+                    <div class="flex mx-auto py-2 text-white text-center">
+                        Powered by the&nbsp;<a href="https://developer.spotify.com/documentation/web-api/"> Spotify Web API</a>
+                    </div>
+                    <div class="flex mx-auto text-white text-center">
+                        Copyright Sonify © 2021
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
 </template>
