@@ -1,5 +1,5 @@
 <template>
-    <div class="my-2 px-4 sm:px-8  flex sm:flex-row flex-col">
+    <div class="my-2 flex sm:flex-row flex-col">
         <div class="flex flex-row mb-1 sm:mb-0">
             <div class="relative">
                 <slot name="selection"></slot>
@@ -10,7 +10,7 @@
         </div>
     </div>
     <div :class="divClass">
-        <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-1 overflow-x-auto " v-if="hasRecords">
+        <div class="py-1 overflow-x-auto " v-if="hasRecords">
             <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
                 <table class="min-w-full w-full leading-normal table-fixed">
                     <thead>
@@ -25,8 +25,8 @@
                 <slot name="pagination" v-if="hasRecords && hasPagination"></slot>
             </div>
         </div>
-        <not-found-error icon='fa fa-search'
-                            errorText="Start typing to initiate the search..."
+        <not-found-error    :icon="errorIcon"
+                            :errorText="errorText"
                             v-else>
         </not-found-error>
     </div>
@@ -51,6 +51,14 @@ export default {
             default:true,
         },
         divClass:String,
+        errorText:{
+            type:String,
+            default:"Start typing to initiate the search...",
+        },
+        errorIcon:{
+            type:String,
+            default:"fa fa-search",
+        }
     },
 }
 </script>

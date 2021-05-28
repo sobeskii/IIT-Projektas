@@ -15,9 +15,9 @@
                 </span>
             </div>
         </cover-component>
-            <div class="max-w-5xl mx-auto flex m-2 px-3 justify-start my-2 flex-wrap flex-row mt-1">
+        <div class="max-w-5xl mx-auto flex px-4 justify-start my-2 flex-wrap flex-row mt-1">
                 <p class="text-base md:text-xl my-1">Releases:</p>
-                <custom-table   divClass="container mx-auto relative h-full"
+                <custom-table   divClass="container mx-auto h-full"
                                 :searchOptions="false" >
 
                     <template v-slot:head >

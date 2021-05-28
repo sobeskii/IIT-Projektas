@@ -5,10 +5,13 @@
                 Best rated release chart
             </h2>
         </template>
-        <div class="max-w-lg lg:max-w-6xl rounded-sm mx-auto p-2 sm:p-8 h-full" >
+        <div class="w-full lg:max-w-6xl rounded-sm mx-auto p-2 lg:p-8 h-full" >
             <custom-table   :hasRecords="releases.data.length > 0"
-                            divClass="container mx-auto sm:px-8 relative h-full"
-                            :searchOptions="false" >
+                            divClass="container mx-auto lg:px-8 relative h-full"
+                            :searchOptions="false"
+                            errorText="There are no rated releases currently"
+                            errorIcon="far fa-frown"
+                             >
                 <template v-slot:selection>
                     <select
                         v-model.number="perPage"
@@ -122,7 +125,7 @@ export default {
             let entryLimit = (this.request_items.perPage * this.releases.current_page);
             entryLimit = (entryLimit > this.releases.total) ? this.releases.total : entryLimit;
             return "Showing " +
-            parseInt( (this.request_items.perPage - this.request_items.perPage)  + 1) +" to " +
+            parseInt( (this.perPage * (this.releases.current_page - 1)  + 1) ) +" to " +
             entryLimit + " of "+ this.releases.total;
         },
     },

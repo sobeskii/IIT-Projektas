@@ -70,7 +70,7 @@ export default {
             if (this.align === 'left') {
                 return 'origin-top-left left-0'
             } else if (this.align === 'right') {
-                return 'origin-top-right right-5'
+                return 'origin-top-right'
             } else {
                 return 'origin-top'
             }

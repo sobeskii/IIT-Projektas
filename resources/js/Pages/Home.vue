@@ -1,33 +1,40 @@
 <template>
     <app-layout>
-        <div class="py-4 bg-white w-full md:w-3/5 mx-auto md:rounded-2xl">
+        <div class="py-4 bg-white w-full lg:w-3/5 mx-auto md:rounded-2xl">
             <div class="w-full md:max-w-7xl mx-auto px-4 md:px-6 lg:px-8 pb-4">
                 <div class="text-center">
                     <h1 class="text-2xl md:text-3xl text-green-600 font-semibold tracking-wide">Discover, Rate and Review Music</h1>
                     <p class="mt-1 sm:mt-2 max-w-2xl text-base sm:text-xl text-gray-500 lg:mx-auto">
-                        Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in accusamus quisquam.
+                        A resource for music fans to keep up with their favourite music. Rate and review music that you enjoy and share your thoughts!
                     </p>
                 </div>
             </div>
             <p class="text-base md:text-xl my-2 mx-2">Top 15 Best Rated Releases:</p>
             <custom-table   divClass="container mx-auto relative h-full"
                             :searchOptions="false"
-                            :hasPagination="false" >
+                            :hasPagination="false"
+                            :hasRecords="releases.length > 0"
+                            errorText="There are no rated releases currently"
+                            errorIcon="far fa-frown" >
                 <template v-slot:head >
                     <th
-                        class="md:w-1/12 w-1/12">
+                        class="md:w-1/12 w-1/12 text-xs text font-semibold text-gray-600 uppercase text-left px-5 py-3">
+                        #
                     </th>
                     <th
-                        class="md:w-2/3 w-1/2">
+                        class="md:w-2/3 w-1/2 text-xs font-semibold text-gray-600 uppercase text-left px-5 py-3">
+                        Release
                     </th>
                     <th
-                        class="md:w-1/4 hidden sm:table-cell w-1/4">
+                        class="md:w-1/4 hidden sm:table-cell w-1/4 text-xs font-semibold text-gray-600 uppercase text-left px-5 py-3">
+                        Rating count
                     </th>
                     <th
-                        class="md:w-1/5 w-1/4">
+                        class="md:w-1/5 w-1/4 text-xs font-semibold text-gray-600 uppercase text-left px-5 py-3">
+                        Rating
                     </th>
                     <th
-                        class="md:w-1/5 w-1/5">
+                        class="md:w-1/5 w-1/5 text-xs font-semibold text-gray-600 uppercase text-left px-5 py-3">
                     </th>
                 </template>
                 <template v-slot:content>

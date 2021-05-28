@@ -51,7 +51,13 @@
                                     :artist_id="primary_artist.id"
                                     >
                 </rating-component>
-            <review-thread :loadMore="LoadMoreReviews" :reviewsShowing="reviewsToShow" :reviews="rating_data.reviews"></review-thread>
+            <review-thread  :loadMore="LoadMoreReviews"
+                            :reviewsShowing="reviewsToShow"
+                            :reviews="rating_data.reviews"
+                            emptyMsg="There are no reviews yet"
+                            >
+
+                            </review-thread>
             </div>
         </div>
     </app-layout>

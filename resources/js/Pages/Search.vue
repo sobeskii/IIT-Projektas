@@ -5,9 +5,10 @@
                 Search for releases
             </h2>
         </template>
-        <div class="max-w-lg lg:max-w-6xl rounded-sm mx-auto p-2 sm:p-8 h-full" >
+        <div class="w-full lg:max-w-6xl rounded-sm mx-auto p-2 sm:p-8 h-full" >
             <custom-table :hasRecords="albums.items.length > 0"
-                            divClass="container mx-auto sm:px-8 relative h-full">
+                            divClass="container mx-auto lg:px-8 relative h-full"
+                            >
 
                 <template v-slot:search_input>
                     <span class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
