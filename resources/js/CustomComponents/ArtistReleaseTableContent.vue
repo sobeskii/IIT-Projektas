@@ -9,7 +9,7 @@
                             alt="" />
                     </div>
                     <div>
-                    <p class="text-gray-900 whitespace-no-wrap px-4">{{data.name}}</p>
+                    <p class="text-gray-900 whitespace-no-wrap px-4">{{ shortenArtistName }}</p>
                     <p class="text-gray-500 whitespace-no-wrap px-4"><small> {{data.release_date}} </small></p>
                     </div>
                 </inertia-link>
@@ -42,6 +42,10 @@ export default {
     computed:{
         ratingAverage(){
             return Number((this.data.rating_average).toFixed(2));
+        },
+        shortenArtistName(){
+            return  parseInt(this.data.name.length) > 20 ?      this.data.name.substring(0,20)+"..." :
+                                                                this.data.name
         }
     }
 }

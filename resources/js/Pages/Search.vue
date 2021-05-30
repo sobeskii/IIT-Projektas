@@ -110,6 +110,7 @@ export default {
             this.offset = 0
         },200),
         changePerPage(){
+            this.offset = 0
             this.$inertia.get(route('search.index'),{
                 term:this.term,
                 offset:this.offset,

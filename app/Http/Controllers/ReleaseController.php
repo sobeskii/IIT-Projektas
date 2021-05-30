@@ -46,7 +46,6 @@ class ReleaseController extends Controller
         $perPage    =   (($request->perPage) != null && $request->perPage <= 20 && $request->perPage >= 5) ? (int)$request->perPage : 15;
         $releases   =   $this->getBestRatedReleases($perPage);
 
-
         return Inertia::render('Chart',[
             'releases'      =>      $releases,
             'request_items' =>      fn()    =>  [   'perPage'  =>  $perPage,    ],
