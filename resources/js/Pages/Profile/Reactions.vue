@@ -16,7 +16,7 @@
                 </inertia-link>
             </div>
         </template>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 justify-start my-2 flex-wrap flex-row mt-1">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 justify-start my-2 flex-wrap flex-row mt-1">
             <p class="text-base md:text-xl mt-2">Reactions:</p>
             <review-thread  :loadMore="LoadMoreReviews"
                             :reviewsShowing="reviewsToShow"

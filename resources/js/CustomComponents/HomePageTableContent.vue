@@ -11,16 +11,16 @@
                             :src="data.release.images[0]['url']"
                             alt="" />
                     </div>
-                    <div>
-                        <p class="pl-8 whitespace-no-wrap text-sm sm:text-base text-gray-500">
+                    <div class="sm:pl-8 pl-3 whitespace-no-wrap text-gray-500">
+                        <p class="text-sm sm:text-base ">
                             <template v-for="(artist) in data.release.artists" v-bind:key=artist.id>
                                 <inertia-link :href="route('artist.index',artist.id)">
                                     {{ artist.name }}&nbsp;
                                 </inertia-link>
                             </template>
                         </p>
-                        <p class="text-gray-900 whitespace-no-wrap text-sm sm:text-xl pl-8">{{data.release.name}}</p>
-                        <p class="text-gray-500 whitespace-no-wrap text-xs sm:text-sm pl-8"><small> {{data.release.release_date}} </small></p>
+                        <p class="text-sm">{{ shortenReleaseName }}</p>
+                        <p class="text-xs"><small> {{data.release.release_date}} </small></p>
                     </div>
                 </inertia-link>
             </div>
@@ -53,6 +53,10 @@ export default {
         },
         tableNumber(){
             return (this.index + 1)
+        },
+        shortenReleaseName(){
+            return  parseInt(this.data.release.name.length) > 15 ?      this.data.release.name.substring(0,15)+"..." :
+                                                                        this.data.release.name
         }
     }
 }

@@ -44,15 +44,15 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         if($request->user()){
-            $userdata = $request->user()->only('id', 'name', 'email');
+            $userdata = $request->user()->only('id', 'name', 'email','role');
             $userdata['isLoggedIn'] = Auth::check();
         }
         else $userdata['isLoggedIn'] = false;
 
         return array_merge(parent::share($request), [
             'user'      =>  $userdata,
-            'success'   =>  fn() => (Session::get('success')) != null ?     Session::get('success') :
-                                                                            new \stdClass(),
+            'success'   => (Session::get('success')) != null    ?       Session::get('success') :
+                                                                        new \stdClass(),
         ]);
     }
 }

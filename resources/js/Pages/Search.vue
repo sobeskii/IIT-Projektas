@@ -1,13 +1,13 @@
 <template>
-    <app-layout>
+    <app-layout :searchActive="true">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Search for releases
             </h2>
         </template>
-        <div class="w-full lg:max-w-6xl rounded-sm mx-auto p-2 sm:p-8 h-full" >
+        <div class="w-full lg:max-w-5xl rounded-sm mx-auto p-2 lg:py-4 lg:px-8 h-full" >
             <custom-table :hasRecords="albums.items.length > 0"
-                            divClass="container mx-auto lg:px-8 relative h-full"
+                            divClass="container mx-auto relative h-full"
                             >
 
                 <template v-slot:search_input>
@@ -48,7 +48,7 @@
                         Release
                     </th>
                     <th
-                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase w-1/5 tracking-wider">
+                        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase w-1/3 tracking-wider">
                         Release date
                     </th>
                     <th
@@ -57,9 +57,7 @@
                     </th>
                 </template>
                 <template v-slot:content>
-                    <transition-group name="list">
                         <release-table-content v-for="album in albums.items" :key="album.id" :data="album" ></release-table-content>
-                    </transition-group>
                 </template>
                 <template v-if="albums.total > perPage" v-slot:pagination>
                     <pagination :paginationNext="nextPage" :paginationPrevious="previousPage" >
@@ -164,17 +162,8 @@ export default {
 
             return "Showing " + parseInt(this.offset + 1) +" to " + entryLimit + " of "+ this.albums.total;
         },
+
     },
 }
 </script>
-<style scoped>
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateY(30px);
-}
-</style>
+

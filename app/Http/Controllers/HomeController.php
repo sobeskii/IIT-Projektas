@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Models\Rating;
 use Aerni\Spotify\Facades\SpotifyFacade as Spotify;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('banned');
+    }
     /**
      * Show the application dashboard.
      *

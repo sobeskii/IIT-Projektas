@@ -22,14 +22,18 @@
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('search.index')" :active="false">
+                                <jet-nav-link :href="route('search.index')" :active="searchActive">
                                     Search
                                 </jet-nav-link>
                             </div>
-                            <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
-                                <jet-nav-link :href="route('release.chart')" :active="false">
+                                <jet-nav-link :active="chartsActive" :href="route('release.chart')" >
                                     Charts
+                                </jet-nav-link>
+                            </div>
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-5 sm:flex">
+                                <jet-nav-link v-if="$page.props.user.role == 2" :active="adminPanelActive" :href="route('admin.index')" >
+                                    Admin Panel
                                 </jet-nav-link>
                             </div>
                         </div>
@@ -104,11 +108,14 @@
                 <!-- Responsive Navigation Menu -->
                 <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                     <div class="pt-2 pb-3 space-y-1">
-                        <jet-responsive-nav-link :active="false" :href="route('search.index')" >
+                        <jet-responsive-nav-link :active="searchActive" :href="route('search.index')" >
                             Search
                         </jet-responsive-nav-link>
-                        <jet-responsive-nav-link :active="false" :href="route('release.chart')" >
+                        <jet-responsive-nav-link :active="chartsActive" :href="route('release.chart')" >
                             Charts
+                        </jet-responsive-nav-link>
+                        <jet-responsive-nav-link v-if="$page.props.user.role == 2" :active="adminPanelActive" :href="route('admin.index')">
+                            Admin Panel
                         </jet-responsive-nav-link>
                     </div>
                     <!-- Responsive Settings Options -->
@@ -201,6 +208,18 @@
         },
         props: {
             isLoggedIn: Boolean,
+            searchActive:{
+                type:Boolean,
+                default:false,
+            },
+            chartsActive:{
+                type:Boolean,
+                default:false,
+            },
+            adminPanelActive:{
+                type:Boolean,
+                default:false,
+            }
         },
         data() {
             return {
@@ -212,6 +231,6 @@
             logout() {
                 this.$inertia.post(route('logout'));
             },
-        }
+        },
     }
 </script>

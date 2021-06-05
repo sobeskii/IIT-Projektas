@@ -8,6 +8,10 @@ use Inertia\Inertia;
 
 class SearchController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('banned');
+    }
   /**
    * Search the specified album/release on the Spotify API.
    *

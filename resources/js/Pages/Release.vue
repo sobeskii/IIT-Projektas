@@ -56,8 +56,7 @@
                             :reviews="rating_data.reviews"
                             emptyMsg="There are no reviews yet"
                             >
-
-                            </review-thread>
+            </review-thread>
             </div>
         </div>
     </app-layout>

@@ -8,6 +8,10 @@ use Inertia\Inertia;
 
 class ArtistController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('banned');
+    }
     public function index($artistId){
 
         $artist = Spotify::artist($artistId)->get();

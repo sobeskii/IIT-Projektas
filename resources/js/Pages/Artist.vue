@@ -22,22 +22,22 @@
 
                     <template v-slot:head >
                         <th
-                            class="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase md:w-2/3  w-1/2 tracking-wider">
+                            class="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase md:w-2/3  sm:w-1/2 w-1/2 tracking-wider">
                             Release name
                         </th>
                         <th
-                            class="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase w-1/4  tracking-wider">
+                            class="px-2 hidden sm:table-cell py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase sm:w-1/4  tracking-wider">
                         </th>
                         <th
-                            class="px-2 py-2 border-b-2 border-gray-200 hidden sm:table-cell bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase md:w-1/4 w-1/4  tracking-wider">
+                            class="px-2 py-2 border-b-2 border-gray-200 hidden sm:table-cell bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase  md:w-1/4 sm:w-1/4  tracking-wider">
                             Rating count
                         </th>
                         <th
-                            class="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase md:w-1/5 w-1/4  tracking-wider">
+                            class="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase md:w-1/5 sm:w-1/4 w-1/3 tracking-wider">
                             Community rating
                         </th>
                         <th
-                            class="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase md:w-1/5 w-1/5  tracking-wider">
+                            class="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase md:w-1/5 sm:w-1/5 w-1/4  tracking-wider">
                         </th>
                     </template>
                     <template v-slot:content>

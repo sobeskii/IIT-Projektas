@@ -1,13 +1,13 @@
 <template>
-    <app-layout>
+    <app-layout :chartsActive="true">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Best rated release chart
             </h2>
         </template>
-        <div class="w-full lg:max-w-6xl rounded-sm mx-auto p-2 lg:p-8 h-full" >
+        <div class="w-full lg:max-w-5xl rounded-sm mx-auto p-2 lg:py-4 lg:px-8 h-full" >
             <custom-table   :hasRecords="releases.data.length > 0"
-                            divClass="container mx-auto lg:px-8 relative h-full"
+                            divClass="container mx-auto relative h-full"
                             :searchOptions="false"
                             errorText="There are no rated releases currently"
                             errorIcon="far fa-frown"
@@ -62,7 +62,6 @@
 </template>
 <script>
 import AppLayout from '@/Layouts/AppLayout'
-import _ from 'lodash'
 import Pagination from '@/CustomComponents/Pagination'
 import CustomTable from '@/CustomComponents/Table'
 import HomeReleaseContent from '../CustomComponents/HomePageTableContent.vue'

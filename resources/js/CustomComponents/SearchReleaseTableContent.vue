@@ -2,7 +2,7 @@
     <tr>
         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
             <div class="flex items-center">
-                <div class="flex-shrink-0 lg:w-36 lg:h-36 w-20 h-20">
+                <div class="flex-shrink-0 lg:w-32 lg:h-32 w-14 h-14">
                     <inertia-link :href="route('release.index',data.id)">
                         <img class="w-full h-full rounded-md"
                         :src="data.images[1]['url']"
@@ -21,7 +21,7 @@
             </p>
             <p class="whitespace-no-wrap text-gray-500 text-base">
                 <inertia-link :href="route('release.index',data.id)">
-                    {{ data.name }}
+                    {{ shortenReleaseName }}
                 </inertia-link>
             </p>
         </td>
@@ -40,5 +40,11 @@ export default {
     props:{
         data:Object
     },
+    computed:{
+        shortenReleaseName(){
+            return  parseInt(this.data.name.length) > 20 ?      this.data.name.substring(0,20)+"..." :
+                                                                this.data.name
+        }
+    }
 }
 </script>

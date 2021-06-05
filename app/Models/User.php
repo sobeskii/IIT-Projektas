@@ -50,6 +50,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public static function getUsers($term,$perPage){
+        return (strlen($term)  >   0)  ?    User::where('name', 'like', '%' . $term . '%')->paginate($perPage)  :
+                                            User::paginate($perPage);
+    }
+
+    public function updateRole($role){  return $this->where('id',$this->id)->update(['role' => $role]); }
 
     /**
      * Get the rating record associated with the user.
