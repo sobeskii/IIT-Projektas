@@ -26040,7 +26040,7 @@ var _hoisted_6 = {
   "class": "whitespace-no-wrap text-xs md:text-base  text-white"
 };
 var _hoisted_7 = {
-  "class": "flex-none sm:w-1/4 w-1/2 "
+  "class": "flex-none sm:w-1/4 w-1/2"
 };
 var _hoisted_8 = {
   "class": "bottom-2 absolute"

@@ -21,7 +21,7 @@
                     </p>
                 </span>
             </div>
-            <div class="flex-none sm:w-1/4 w-1/2 ">
+            <div class="flex-none sm:w-1/4 w-1/2">
                 <span class="bottom-2 absolute">
                     <h5 class="text-white md:text-base text-xs">Community rating: </h5>
                     <p class="text-white md:text-base text-xs">

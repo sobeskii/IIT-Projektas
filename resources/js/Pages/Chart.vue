@@ -5,7 +5,7 @@
                 Best rated release chart
             </h2>
         </template>
-        <div class="w-full lg:max-w-5xl rounded-sm mx-auto p-2 lg:py-4 lg:px-8 h-full" >
+        <div class="w-full lg:max-w-5xl rounded-sm mx-auto p-2 lg:py-4 lg:px-8 h-full">
             <custom-table   :hasRecords="releases.data.length > 0"
                             divClass="container mx-auto relative h-full"
                             :searchOptions="false"
