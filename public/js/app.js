@@ -25217,7 +25217,7 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Reviews and ratings ");
 
 var _hoisted_8 = {
-  "class": "max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 justify-start my-2 flex-wrap flex-row mt-1"
+  "class": "max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 justify-start my-2 flex-wrap flex-row mt-1"
 };
 
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
@@ -26040,7 +26040,7 @@ var _hoisted_6 = {
   "class": "whitespace-no-wrap text-xs md:text-base  text-white"
 };
 var _hoisted_7 = {
-  "class": "flex-none w-1/4 "
+  "class": "flex-none sm:w-1/4 w-1/2 "
 };
 var _hoisted_8 = {
   "class": "bottom-2 absolute"
