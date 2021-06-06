@@ -6,7 +6,7 @@
                     <inertia-link :href="route('release.index',data.id)">
                         <img class="w-full h-full rounded-md"
                         :src="data.images[1]['url']"
-                        alt="" />
+                        :alt="data.name" />
                     </inertia-link>
                 </div>
             </div>

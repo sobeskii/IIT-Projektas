@@ -2,10 +2,10 @@
     <app-layout>
         <cover-component :cover="primary_artist.images[0].url">
             <div class="md:h-full md:w-40 w-20 h-full">
-                <img class="w-100 h-100 rounded-md" :src="release.images[1].url" />
+                <img class="w-100 h-100 rounded-md" :src="release.images[1].url" alt="Album cover"/>
             </div>
             <div class="flex-none w-1/2 overflow-hidden">
-                <span class="bottom-2 sm:absolute sm:w-2/6">
+                <div class="bottom-2 sm:absolute sm:w-2/6">
                     <p class="whitespace-no-wrap text-white md:text-xl text-sm">
                         <a rel="noreferrer" :href="release.external_urls['spotify']" target="_blank" class="text-green-500">
                             <i class="fab fa-spotify" aria-hidden="true"></i>
@@ -19,15 +19,15 @@
                             </inertia-link>
                         </template>
                     </p>
-                </span>
+                </div>
             </div>
             <div class="flex-none sm:w-1/4 w-1/2">
-                <span class="bottom-2 absolute">
+                <div class="bottom-2 absolute">
                     <h5 class="text-white md:text-base text-xs">Community rating: </h5>
                     <p class="text-white md:text-base text-xs">
                         {{ ratingAverage }}  <i class="fa fa-star" aria-hidden="true"></i> <small> from  ratings {{ rating_data.count }} </small>
                     </p>
-                </span>
+                </div>
             </div>
         </cover-component>
         <div class="max-w-5xl mx-auto flex m-2 px-3 justify-start my-2 flex-wrap md:gap-8 flex-row mt-2 md:mt-4">

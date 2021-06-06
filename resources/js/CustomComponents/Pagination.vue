@@ -6,12 +6,12 @@
             </slot>
         </span>
         <div class="inline-flex mt-2 xs:mt-0">
-            <button href="#"
+            <button
                 @click="this.paginationPrevious()"
                 class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l">
                 Previous
             </button>
-            <button href="#"
+            <button
                 @click="this.paginationNext()"
                 class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r">
                 Next

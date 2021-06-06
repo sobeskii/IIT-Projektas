@@ -1,7 +1,7 @@
 <template>
         {{ total }}
         <template v-if="disabled || !$page.props.user.isLoggedIn">
-            <span :id="getReactionType" :class="isActive" > </span>
+            <span :class="isActive+' '+getReactionType" > </span>
         </template>
         <template v-else>
             <inertia-link   class="cursor-pointer"
@@ -9,7 +9,7 @@
                             preserve-scroll method="POST"
                             :href="route( 'like', review.id )"
                             :data="{ is_like : reaction_type }">
-                <span :id="getReactionType" :class="isActive" > </span>
+                <span :class="isActive+' '+getReactionType" > </span>
             </inertia-link>
         </template>
 </template>
@@ -35,13 +35,13 @@ export default{
 }
 </script>
 <style scoped>
-    #thumbs-up:hover {
+    .thumbs-up:hover {
         color:#008000;
     }
-    #thumbs-down:hover {
+    .thumbs-down:hover {
         color:#FF0000;
     }
-    #thumbs-up:before {
+    .thumbs-up:before {
         content: "\f164";
         margin: 5px;
         font-size: 1em;
@@ -49,7 +49,7 @@ export default{
         font-family: "Font Awesome 5 Free";
         display: inline-block;
     }
-    #thumbs-down:before {
+    .thumbs-down:before {
         content: "\f165";
         margin: 5px;
         font-size: 1em;

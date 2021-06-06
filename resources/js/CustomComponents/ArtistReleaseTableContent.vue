@@ -6,7 +6,7 @@
                     <div class="flex-shrink-0 lg:w-18 lg:h-18 w-10 h-10">
                             <img class="w-full h-full rounded-md"
                             :src="data.images[2]['url']"
-                            alt="" />
+                            :alt="data.name" />
                     </div>
                     <div>
                     <p class="text-gray-900 whitespace-no-wrap px-4">{{ shortenArtistName }}</p>

@@ -25,14 +25,14 @@
             <template v-if="belongsToUserProfileReaction">
                 <inertia-link :href="route('release.index',review.release_id)">
                     <div class="w-full text-sm md:text-base p-2">
-                        <div id="comment_header">
-                            <strong id="username">{{ review.user.name }}</strong>,
+                        <div class="h-8">
+                            <strong>{{ review.user.name }}</strong>,
                             <small class="text-gray-500" > {{ formatDate }} </small>
-                            <small class="float-right text-muted -mt-2 lg:-mt-1 hidden sm:block">
-                                <div id="user_rating" :class="review.rating+'_rating'" ></div>
-                            </small>
+                            <div class="float-right text-muted -mt-2 lg:-mt-1 hidden sm:block">
+                                <div class="h-8 w-25 p-1" :class="review.rating+'_rating'" ></div>
+                            </div>
                         </div>
-                        <div id="py-2" v-if="review.review != null">
+                        <div class="pb-1" v-if="review.review != null">
                             {{ review.review }}
                         </div>
                     </div>
@@ -41,14 +41,14 @@
             <!-- Show rating with a review normally -->
             <template v-else>
                 <div class="w-full text-sm md:text-base px-2">
-                    <div id="comment_header">
-                        <strong id="username">{{ review.user.name }}</strong>,
+                    <div class="h-8">
+                        <strong>{{ review.user.name }}</strong>,
                         <small class="text-gray-500" > {{ formatDate }} </small>
-                        <small class="float-right text-muted -mt-2 lg:-mt-1">
-                            <div id="user_rating" :class="review.rating+'_rating'" ></div>
-                        </small>
+                        <div class="float-right text-muted -mt-2 lg:-mt-1">
+                            <div class="h-8 w-25 p-1" :class="review.rating+'_rating'" ></div>
+                        </div>
                     </div>
-                    <div id="py-2">
+                    <div class="pb-1">
                         {{ review.review }}
                     </div>
                 </div>
@@ -106,12 +106,9 @@ export default{
 }
 </script>
 <style scoped>
-    #comment_header{
-        min-height: 30px;
-    }
-    #user_rating {
-        height: 30px;
-        width:100px;
+
+    .w-25 {
+        width:6.5rem;
     }
     [class~="0_rating"] {background: url(../../../public/storage/assets/0s.png); }
     [class~="0.5_rating"] {background: url(../../../public/storage/assets/1s.png); }

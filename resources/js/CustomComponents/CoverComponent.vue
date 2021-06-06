@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="frame w-full h-80">
-            <img class="w-full object-cover object-center h-full" :src="cover" />
+            <img class="w-full object-cover object-center h-full" :src="cover" alt="Artist image"/>
             <div class="cover_item">
                 <div class="max-w-5xl mx-auto flex m-2 px-3 justify-start h-full gap-5 flex-row">
                     <slot></slot>

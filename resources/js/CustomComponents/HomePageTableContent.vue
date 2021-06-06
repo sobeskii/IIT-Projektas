@@ -9,20 +9,22 @@
                     <div class="flex-shrink-0 sm:w-32 sm:h-32 w-14 h-14 p-2">
                             <img class="w-full h-full rounded-md"
                             :src="data.release.images[0]['url']"
-                            alt="" />
-                    </div>
-                    <div class="sm:pl-8 pl-3 whitespace-no-wrap text-gray-500">
-                        <p class="text-sm sm:text-base ">
-                            <template v-for="(artist) in data.release.artists" v-bind:key=artist.id>
-                                <inertia-link :href="route('artist.index',artist.id)">
-                                    {{ artist.name }}&nbsp;
-                                </inertia-link>
-                            </template>
-                        </p>
-                        <p class="text-sm">{{ shortenReleaseName }}</p>
-                        <p class="text-xs"><small> {{data.release.release_date}} </small></p>
+                            :alt="data.name" />
                     </div>
                 </inertia-link>
+                <div class="sm:pl-8 pl-3 whitespace-no-wrap text-gray-500">
+                    <p class="text-sm sm:text-base ">
+                        <template v-for="(artist) in data.release.artists" v-bind:key=artist.id>
+                            <inertia-link :href="route('artist.index',artist.id)">
+                                {{ artist.name }}&nbsp;
+                            </inertia-link>
+                        </template>
+                    </p>
+                    <inertia-link :href="route('release.index',data.release_id)" class="overflow-ellipsis">
+                        <p class="text-sm">{{ shortenReleaseName }}</p>
+                        <p class="text-xs"><small> {{data.release.release_date}} </small></p>
+                    </inertia-link>
+                </div>
             </div>
         </td>
         <td class="px-4 py-4 border-b hidden sm:table-cell border-gray-200 bg-white sm:text-xl text-base">

@@ -2,7 +2,7 @@
     <app-layout>
         <cover-component :cover="artist.images[0].url">
             <div class="flex-none w-1/2 overflow-hidden">
-                <span class="bottom-2 sm:absolute">
+                <div class="bottom-2 sm:absolute">
                     <p class="whitespace-no-wrap text-xl text-sm:2xl md:text-4xl  text-white">
                         <a rel="noreferrer" :href="artist.external_urls['spotify']" target="_blank" class="text-green-500">
                             <i class="fab fa-spotify" aria-hidden="true"></i>
@@ -12,7 +12,7 @@
                     <p class="whitespace-no-wrap text-xs md:text-xs  text-white">
                         {{ formatFollowers }} followers on Spotify
                     </p>
-                </span>
+                </div>
             </div>
         </cover-component>
         <div class="max-w-5xl mx-auto flex px-4 justify-start my-2 flex-wrap flex-row mt-1">
