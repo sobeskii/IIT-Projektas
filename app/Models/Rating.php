@@ -9,9 +9,8 @@ use Illuminate\Support\Facades\DB;
 class Rating extends Model
 {
     use HasFactory;
-
     protected $table   = 'user_ratings';
-    //
+
     protected $fillable = [ 'rating','release_id', 'user_id', 'review', 'artist_id' ];
     /**
     * Get the user record associated with the rating.
@@ -26,11 +25,11 @@ class Rating extends Model
     */
     public function likeCount(){ return $this->likes()->count(); }
     /**
-    *
+    * Get all ratings of specific release
     */
     public static function getReleaseRatings($releaseId){  return Rating::where( 'release_id' , '=' ,$releaseId );  }
     /**
-    *
+    * Get ratings of all artists releases
     */
     public static function getArtistsReleaseRatings($artistId){  return Rating::where( 'artist_id' , '=' ,$artistId );  }
     /**
@@ -64,7 +63,7 @@ class Rating extends Model
                 }]);
     }
     /*
-    *
+    * Computes and returns the best rated release IDs
     */
     public static function getBestRatedReleaseIds(){
         return Rating::select(DB::raw('release_id, AVG(rating) as average , COUNT(release_id) as count'))
@@ -74,7 +73,7 @@ class Rating extends Model
     }
 
     /**
-    * Retrieve reviews of release with like counts and bool value if the user liked / disliked review
+    * Get reviews of release with like counts and bool value if the user liked / disliked review
     */
     public static function getReviews($releaseId)   {
         return Rating::getReleaseRatings($releaseId)->computeRatingInfo()->
@@ -84,7 +83,7 @@ class Rating extends Model
                                            ->orderBy('created_at','desc');
     }
     /**
-    * Retrieve reviews which user has liked/disliked with like counts and bool value if the user liked / disliked review
+    * Get reviews which user has liked/disliked
     */
     public static function getReviewsUserLiked(){
         return Rating::computeRatingInfo()->whereHas('likes',function($q){
@@ -92,7 +91,7 @@ class Rating extends Model
         })->with('user')->orderBy('created_at','desc');
     }
     /**
-    * Retrieve ratings which user has written with like counts and bool value if the user liked / disliked review
+    * Get ratings which user has written
     */
     public static function getUserRatings(){
         return Rating::computeRatingInfo()->where('user_id',auth()->id())

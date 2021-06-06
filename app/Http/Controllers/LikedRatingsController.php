@@ -11,14 +11,20 @@ class LikedRatingsController extends Controller
     {
         $this->middleware(['auth','banned']);
     }
+    /**
+     * Adds or removes like to/from the database
+     *
+     * @return Illuminate\Support\Facades\Redirect;
+     */
     public function toggle(Rating $rating,Request $request){
+        if($rating != null){
+            if ($rating->likes()->where('user_id',auth()->id())->
+                                where('is_like',$request->is_like)->exists())
+                $rating->likes()->detach(auth()->id());
+            else
+                $rating->likes()->attach(auth()->id()   ,  [ 'is_like'  =>  $request->is_like ]) ;
 
-        if ($rating->likes()->where('user_id',auth()->id())->
-                              where('is_like',$request->is_like)->exists())
-            $rating->likes()->detach(auth()->id());
-        else
-            $rating->likes()->attach(auth()->id()   ,  [ 'is_like'  =>  $request->is_like ]) ;
-
-        return redirect()->back();
+            return redirect()->back();
+        }
     }
 }

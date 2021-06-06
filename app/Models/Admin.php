@@ -8,14 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Admin extends Model
 {
     use HasFactory;
-
-
-    public function ban($id){
-
-    }
-
-    public function unban($id){
-
-    }
-
 }

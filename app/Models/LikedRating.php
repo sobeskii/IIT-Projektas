@@ -17,7 +17,7 @@ class LikedRating extends Model
     */
     public function user() { return $this->belongsTo('App\Models\User'); }
     /**
-    * Get the user record associated with the like.
+    * Get the rating record associated with the like.
     */
     public function rating() { return $this->belongsTo('App\Models\Rating'); }
 }

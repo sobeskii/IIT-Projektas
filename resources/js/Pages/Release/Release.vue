@@ -64,10 +64,10 @@
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
-    import CoverComponent from '../CustomComponents/CoverComponent.vue'
-    import TrackList from '../CustomComponents/TrackList.vue'
-    import RatingComponent from '../CustomComponents/RatingComponent.vue'
-    import ReviewThread from '../CustomComponents/ReviewThread.vue'
+    import CoverComponent from '@/CustomComponents/CoverComponent.vue'
+    import TrackList from '@/CustomComponents/TrackList.vue'
+    import RatingComponent from '@/CustomComponents/RatingComponent.vue'
+    import ReviewThread from '@/CustomComponents/ReviewThread.vue'
 
     export default {
         props:{

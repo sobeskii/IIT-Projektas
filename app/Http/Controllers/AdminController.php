@@ -13,7 +13,11 @@ class AdminController extends Controller
     {
         $this->middleware(['admin','banned']);
     }
-
+    /**
+     * Show admin dashboard
+     *
+     * @return Inertia\Inertia
+     */
     public function index(Request $request)
     {
         $term       =   ($request->term) != null ? $request->term : '';
@@ -27,19 +31,27 @@ class AdminController extends Controller
                                                     'term'      =>  $term,   ],
         ]);
     }
-
+    /**
+     * Ban user
+     *
+     * @return Illuminate\Support\Facades\Redirect
+     */
     public function ban_user(User $user){
-        if($user != null){
+        if($user != null && $user->role != 2){
             $user->updateRole(0);
             return Redirect::route('admin.index')->with(['success' => ['message' => 'User has been banned!']]);
-        } else Redirect::route('admin.index')->with(['error' => ['message' => 'Something went wrong please try again']]);
+        } else redirect()->back()->with(['error' => ['message' => 'Something went wrong please try again']]);
     }
-
+    /**
+     * Lift user ban
+     *
+     * @return Illuminate\Support\Facades\Redirect
+     */
     public function unban_user(User $user){
-        if($user != null){
+        if($user != null && $user->role != 2){
             $user->updateRole(1);
             return Redirect::route('admin.index')->with(['success' => ['message' => 'User has been unbanned!']]);
-        } else Redirect::route('admin.index')->with(['error' => ['message' => 'Something went wrong please try again']]);
+        } else redirect()->back()->with(['error' => ['message' => 'Something went wrong please try again']]);
     }
 
 }

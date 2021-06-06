@@ -25,7 +25,7 @@ class SearchController extends Controller
 
         $releases   =   $this->getReleases($term,$offset,$perPage);
 
-        return Inertia::render('Search',[
+        return Inertia::render('Search/Search',[
             'albums'        =>      fn  ()  =>  $releases,
             'request_items' =>      fn  ()  =>  ['term'     =>  $term,
                                                  'offset'   =>  $offset,
@@ -33,6 +33,11 @@ class SearchController extends Controller
                                                 ],
         ]);
     }
+    /**
+     * Get releases via Spotify API wrapper
+     *
+     * @return array
+     */
     private function getReleases($term,$offset,$perPage){
 
         $releases =  Spotify::searchAlbums($term)->offset($offset)

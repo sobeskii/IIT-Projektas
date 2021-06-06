@@ -64,7 +64,7 @@
 import AppLayout from '@/Layouts/AppLayout'
 import Pagination from '@/CustomComponents/Pagination'
 import CustomTable from '@/CustomComponents/Table'
-import HomeReleaseContent from '../CustomComponents/HomePageTableContent.vue'
+import HomeReleaseContent from '@/CustomComponents/HomePageTableContent.vue'
 import NotFoundError from '@/CustomComponents/NotFoundError'
 
 export default {

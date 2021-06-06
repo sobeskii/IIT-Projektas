@@ -4,6 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserBanned implements Rule
 {
@@ -26,9 +27,12 @@ class UserBanned implements Rule
      */
     public function passes($attribute, $value)
     {
-        if(User::where('email', $value)->first()->role != 0)
-            return true;
-        else return false;
+        if(User::where('email', $value)->first() != null){
+            if(User::where('email', $value)->first()->role == 0){
+                return false;
+            }
+            else return true;
+        } else return true;
     }
 
     /**

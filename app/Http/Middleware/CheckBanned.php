@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+
 class CheckBanned
 {
     /**
@@ -18,7 +20,7 @@ class CheckBanned
     {
         if (Auth::check() && Auth::user()->role == 0) {
             Auth::logout();
-            redirect()->route('login');
+            Redirect::route('login');
         }
        return $next($request);
     }

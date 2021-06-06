@@ -12,18 +12,28 @@ class ArtistController extends Controller
     {
         $this->middleware('banned');
     }
+    /**
+     * Show artist page
+     *
+     * @return Inertia\Inertia
+     */
     public function index($artistId){
 
         $artist = Spotify::artist($artistId)->get();
 
         $artistAlbums = $this->getArtistReleases($artistId);
 
-        return Inertia::render('Artist',[
+        return Inertia::render('Artist/Artist',[
             'artist'            =>      fn () => $artist,
             'artist_releases'   =>      fn () => $artistAlbums,
         ]);
     }
 
+    /**
+     * Filters and returns artists albums,singles and their ratings
+     *
+     * @return array
+     */
     private function getArtistReleases($artistId){
         // Get initial data of releases (total)
         $releases = Spotify::artistAlbums($artistId)->includeGroups('album,single')
@@ -34,7 +44,7 @@ class ArtistController extends Controller
         $all_releases = array_merge($all_releases,$releases['items']);
 
         // Get the rest of release data
-        //Put all release data into one array
+        // Put all release data into one array
 
         for ($i=50; $i < $releases['total']; $i+=50){
             $items = Spotify::artistAlbums($artistId)->includeGroups('album,single')->limit(50)->offset($i)->get()['items'];

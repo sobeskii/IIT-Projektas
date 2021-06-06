@@ -52,7 +52,7 @@
     import JetAuthenticationCard from '@/Jetstream/AuthenticationCard'
     import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo'
     import CustomTable from '@/CustomComponents/Table'
-    import HomeReleaseContent from '../CustomComponents/HomePageTableContent.vue'
+    import HomeReleaseContent from '@/CustomComponents/HomePageTableContent.vue'
 
 
     export default {

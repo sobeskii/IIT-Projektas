@@ -61,11 +61,11 @@
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
-    import CoverComponent from '../CustomComponents/CoverComponent.vue'
+    import CoverComponent from '@/CustomComponents/CoverComponent.vue'
     import CustomTable from '@/CustomComponents/Table'
-    import ArtistReleaseContent from '../CustomComponents/ArtistReleaseTableContent.vue'
-    import Pagination from '../CustomComponents/Pagination'
-    import LoadMore from '../CustomComponents/LoadMore'
+    import ArtistReleaseContent from '@/CustomComponents/ArtistReleaseTableContent.vue'
+    import Pagination from '@/CustomComponents/Pagination'
+    import LoadMore from '@/CustomComponents/LoadMore'
 
     export default {
         props:{

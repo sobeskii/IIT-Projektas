@@ -1,4 +1,4 @@
-<template>
+<template v-cloak>
     <div id="app_layout">
         <template v-if="$page.props.errors">
             <toast-list :toast="$page.props.errors" :isError="true"></toast-list>
@@ -168,9 +168,8 @@
             <footer class="footer text-xs sm:text-sm bg-green-600 flex flex-wrap items-center justify-between p-3 mt-auto">
                 <div class="container mx-auto flex flex-col flex-wrap items-center justify-between">
                     <ul class="flex mx-auto text-white text-center">
-                    <li class="px-2 cursor-pointer hover:underline">Terms & Conditions</li>
-                    <li class="px-2 cursor-pointer hover:underline">Privacy</li>
-                    <li class="px-2 cursor-pointer hover:underline">Cookies</li>
+                    <li class="px-2 cursor-pointer hover:underline"><a target="_blank" :href="route('terms.show')"> Terms & Conditions </a></li>
+                    <li class="px-2 cursor-pointer hover:underline"><a target="_blank" :href="route('policy.show')"> Privacy </a></li>
                     </ul>
                     <div class="flex mx-auto py-2 text-white text-center">
                         Powered by the&nbsp;<a href="https://developer.spotify.com/documentation/web-api/"> Spotify Web API</a>
@@ -191,8 +190,8 @@
     import JetDropdownLink from '@/Jetstream/DropdownLink'
     import JetNavLink from '@/Jetstream/NavLink'
     import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
-    import Toast from "./../CustomComponents/Toast"
-    import ToastList from "./../CustomComponents/ToastList"
+    import Toast from "@/CustomComponents/Toast"
+    import ToastList from "@/CustomComponents/ToastList"
 
     export default {
         components: {

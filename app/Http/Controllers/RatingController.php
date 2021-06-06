@@ -14,6 +14,11 @@ class RatingController extends Controller
     {
         $this->middleware(['auth','banned']);
     }
+    /**
+     * Adds or updates rating in the database
+     *
+     * @return Illuminate\Support\Facades\Redirect;
+     */
     public function put(Request $request){
 
         $request->validate( [   'review'        =>  'nullable|string|max:10000|min:5',
@@ -35,15 +40,22 @@ class RatingController extends Controller
         return Redirect::route('release.index',$request->release_id)->with(['success' => ['message' => 'Rating added']]);
     }
 
+    /**
+     * Deletes rating from the database
+     *
+     * @return Illuminate\Support\Facades\Redirect;
+     */
     public function delete(Rating $rating,Request $request){
+        if($rating != null){
+            $request->validate( [   'release_id'    =>  ['required','string',new ReleaseExists],
+                                    'artist_id'     =>  ['required','string',new ArtistExists],
+                                ]);
 
-        $request->validate( [   'release_id'    =>  ['required','string',new ReleaseExists],
-                                'artist_id'     =>  ['required','string',new ArtistExists],
-                            ]);
+            $rating->likes()->detach();
+            $rating->delete();
 
-        $rating->likes()->detach();
-        $rating->delete();
-
-        return Redirect::route('release.index',$request->release_id)->with(['success' => ['message' => 'Rating removed']]);
+            return Redirect::route('release.index',$request->release_id)->with(['success' => ['message' => 'Rating removed']]);
+        }
+        else return Redirect::route('release.index',$request->release_id)->with(['error' => ['message' => 'Something went wrong! Please try again.']]);
     }
 }

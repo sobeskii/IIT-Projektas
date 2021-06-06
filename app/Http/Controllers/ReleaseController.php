@@ -33,7 +33,7 @@ class ReleaseController extends Controller
                                     'reviews'   =>      Rating::getReviews($releaseId)->get(),
                                 ];
 
-        return Inertia::render('Release',[
+        return Inertia::render('Release/Release',[
             'release'                       =>  fn()    =>      $release,
             'primary_artist'                =>  fn()    =>      $artist,
             'user_rating_data'              =>  fn()    =>      [
@@ -44,19 +44,27 @@ class ReleaseController extends Controller
             'rating_data'                   =>  fn()    =>      $rating_data,
         ]);
     }
-
+    /**
+     * Show chart page
+     *
+     * @return Inertia/Inertia
+     */
     public function show_chart(Request $request)
     {
         $perPage    =   (($request->perPage) != null && $request->perPage <= 20 && $request->perPage >= 5) ? (int)$request->perPage : 15;
-        $releases   =   $this->getBestRatedReleases($perPage);
+        $releases   =   $this->appendAPIData($perPage);
 
-        return Inertia::render('Chart',[
+        return Inertia::render('Release/Chart',[
             'releases'      =>      $releases,
             'request_items' =>      fn()    =>  [   'perPage'  =>  $perPage,    ],
         ]);
     }
-
-    private function getBestRatedReleases($perPage) {
+    /**
+     * Append API data to the rating information from the database
+     *
+     * @return array
+     */
+    private function appendAPIData($perPage) {
         $releases    =   Rating::getBestRatedReleaseIds()->paginate($perPage);
 
         foreach ($releases as $release) {
