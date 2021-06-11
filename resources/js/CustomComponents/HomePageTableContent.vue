@@ -9,7 +9,7 @@
                     <div class="flex-shrink-0 sm:w-32 sm:h-32 w-14 h-14 p-2">
                             <img class="w-full h-full rounded-md"
                             :src="data.release.images[0]['url']"
-                            :alt="data.name" />
+                            :alt="data.release.name" />
                     </div>
                 </inertia-link>
                 <div class="sm:pl-8 pl-3 whitespace-no-wrap text-gray-500">
